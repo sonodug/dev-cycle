@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using System.Threading;
 using wpf_game_dev_cycle.Model;
 using wpf_game_dev_cycle.Repositories;
 using wpf_game_dev_cycle.Services;
@@ -49,7 +44,6 @@ namespace wpf_game_dev_cycle.ViewModel
             else
             {
                 CurrentUserAccount.DisplayName = "Invalid user, not logged in";
-                //Hide child views.
             }
         }
     }

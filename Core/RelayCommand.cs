@@ -1,18 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
+
+#pragma warning disable CS8767
+#pragma warning disable CS8612
 
 namespace wpf_game_dev_cycle.ViewModel
 {
     public class RelayCommand : ICommand
     {
-        //Fields
         private readonly Action<object> _executeAction;
         private readonly Predicate<object> _canExecuteAction;
-        //Constructors
+        
         public RelayCommand(Action<object> executeAction)
         {
             _executeAction = executeAction;
@@ -24,12 +22,13 @@ namespace wpf_game_dev_cycle.ViewModel
             _canExecuteAction = canExecuteAction;
         }
         //Events
+
         public event EventHandler CanExecuteChanged
         {
-            add { CommandManager.RequerySuggested += value; }
-            remove { CommandManager.RequerySuggested -= value; }
+            add => CommandManager.RequerySuggested += value;
+            remove => CommandManager.RequerySuggested -= value;
         }
-        //Methods
+
         public bool CanExecute(object parameter)
         {
             return _canExecuteAction == null ? true : _canExecuteAction(parameter);

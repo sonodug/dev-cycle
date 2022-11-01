@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Security.Principal;
 using System.Security;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using wpf_game_dev_cycle.Model;
 using wpf_game_dev_cycle.Repositories;
@@ -29,10 +25,7 @@ namespace wpf_game_dev_cycle.ViewModel
         //Properties
         public string Username
         {
-            get
-            {
-                return _username;
-            }
+            get => _username;
 
             set
             {
@@ -43,10 +36,7 @@ namespace wpf_game_dev_cycle.ViewModel
 
         public SecureString Password
         {
-            get
-            {
-                return _password;
-            }
+            get => _password;
 
             set
             {
@@ -57,10 +47,7 @@ namespace wpf_game_dev_cycle.ViewModel
 
         public string ErrorMessage
         {
-            get
-            {
-                return _errorMessage;
-            }
+            get => _errorMessage;
 
             set
             {
@@ -71,10 +58,7 @@ namespace wpf_game_dev_cycle.ViewModel
 
         public bool IsViewVisible
         {
-            get
-            {
-                return _isViewVisible;
-            }
+            get => _isViewVisible;
 
             set
             {
@@ -82,9 +66,9 @@ namespace wpf_game_dev_cycle.ViewModel
                 OnPropertyChanged(nameof(IsViewVisible));
             }
         }
-
-        //-> Commands
+        
         public ICommand LoginCommand { get; }
+        public ICommand RegisterCommand { get; }
         public ICommand RecoverPasswordCommand { get; }
         public ICommand ShowPasswordCommand { get; }
         public ICommand RememberPasswordCommand { get; }
@@ -94,6 +78,7 @@ namespace wpf_game_dev_cycle.ViewModel
         {
             _userRepository = new UserRepository();
             LoginCommand = new RelayCommand(ExecuteLoginCommand, CanExecuteLoginCommand);
+            RegisterCommand = new RelayCommand(ExecuteRegisterCommand);
             RecoverPasswordCommand = new RelayCommand(p => ExecuteRecoverPassCommand("", ""));
 
             _loginService = loginService;
@@ -102,11 +87,11 @@ namespace wpf_game_dev_cycle.ViewModel
         private bool CanExecuteLoginCommand(object obj)
         {
             bool validData;
-            if (string.IsNullOrWhiteSpace(Username) || Username.Length < 3 ||
-                Password == null || Password.Length < 3)
+            if (string.IsNullOrWhiteSpace(Username) || Username.Length < 3 || Password == null || Password.Length < 3)
                 validData = false;
             else
                 validData = true;
+            
             return validData;
         }
 
@@ -130,6 +115,11 @@ namespace wpf_game_dev_cycle.ViewModel
         private void ExecuteRecoverPassCommand(string username, string email)
         {
             throw new NotImplementedException();
+        }
+
+        private void ExecuteRegisterCommand(object obj)
+        {
+            
         }
     }
 }

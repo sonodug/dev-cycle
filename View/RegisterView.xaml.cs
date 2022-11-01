@@ -1,14 +1,11 @@
-﻿using System.Windows;
+using System.Windows;
 using System.Windows.Input;
 
 namespace wpf_game_dev_cycle.View
 {
-    /// <summary>
-    /// Interaction logic for LoginView.xaml
-    /// </summary>
-    public partial class LoginView : Window
+    public partial class RegisterView : Window
     {
-        public LoginView()
+        public RegisterView()
         {
             InitializeComponent();
         }
