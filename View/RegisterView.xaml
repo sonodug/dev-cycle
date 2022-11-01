@@ -6,9 +6,9 @@
         xmlns:local="clr-namespace:wpf_game_dev_cycle.View"
         xmlns:viewModel="clr-namespace:wpf_game_dev_cycle.ViewModel"
         xmlns:CustomControls="clr-namespace:wpf_game_dev_cycle.CustomControls"
-        DataContext="{Binding Path=LoginViewModel, Source={StaticResource ViewModelLocator}}"
+        DataContext="{Binding Path=RegisterViewModel, Source={StaticResource ViewModelLocator}}"
         mc:Ignorable="d"
-        Title="LoginView" Height="550" Width="500"
+        Title="RegisterView" Height="550" Width="500"
         WindowStyle="None"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
@@ -101,6 +101,7 @@
                 
                 <Grid Grid.Row="1">
                     <Button Style="{StaticResource HeaderButton_Style}"
+                            Command="{Binding ReturnWindowCommand}"
                             BorderThickness="0"
                             Content="←"
                             Foreground="White"
@@ -161,7 +162,7 @@
                                Margin="0,15,0,0"/>
                     
                     <TextBox x:Name="Email"
-                             Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}"
+                             Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}"
                              FontSize="13"
                              FontWeight="Medium"
                              FontFamily="Montserrat"                            
@@ -183,7 +184,7 @@
                                Margin="0,15,0,0"/>
                     
                     <TextBox x:Name="PhoneNumber"
-                             Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}"
+                             Text="{Binding PhoneNumber, UpdateSourceTrigger=PropertyChanged}"
                              FontSize="13"
                              FontWeight="Medium"
                              FontFamily="Montserrat"                            

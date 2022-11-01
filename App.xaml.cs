@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using wpf_game_dev_cycle.View;
 
 namespace wpf_game_dev_cycle
@@ -17,9 +11,11 @@ namespace wpf_game_dev_cycle
         protected void ApplicationStart(object sender, StartupEventArgs e)
         {
             ViewModelLocator.Init();
-            
-            var loginView = new LoginView();
 
+            //var navigationService = new WindowNavigationService();
+            var loginView = new LoginView();
+            //navigationService.CurrentWindow = loginView;
+            
             loginView.IsVisibleChanged += (s, ev) =>
             {
                 if (loginView.IsVisible == false && loginView.IsLoaded)

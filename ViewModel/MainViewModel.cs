@@ -25,7 +25,7 @@ namespace wpf_game_dev_cycle.ViewModel
 
         public MainViewModel(LoginService loginService)
         {
-            _userRepository = new UserRepository();
+            _userRepository = new UserRepositoryControl();
             CurrentUserAccount = new UserAccountModel();
             
             _loginService = loginService;

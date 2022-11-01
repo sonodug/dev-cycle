@@ -12,11 +12,15 @@ namespace wpf_game_dev_cycle
         {
             var services = new ServiceCollection();
 
-            services.AddSingleton<LoginViewModel>();
+            services.AddSingleton<WindowNavigationService>();
+            
+            services.AddTransient<LoginViewModel>();
+            services.AddTransient<RegisterViewModel>();
             services.AddSingleton<MainViewModel>();
             
             services.AddSingleton<PageService>();
             services.AddSingleton<LoginService>();
+            services.AddSingleton<RegistrationService>();
 
             _provider = services.BuildServiceProvider();
 
@@ -27,6 +31,7 @@ namespace wpf_game_dev_cycle
         }
 
         public LoginViewModel LoginViewModel => _provider.GetRequiredService<LoginViewModel>();
+        public RegisterViewModel RegisterViewModel => _provider.GetRequiredService<RegisterViewModel>();
         public MainViewModel MainViewModel => _provider.GetRequiredService<MainViewModel>();
     }
 }

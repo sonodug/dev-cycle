@@ -147,7 +147,7 @@
                            TextWrapping="Wrap"/>
                     
                         <Button Style="{StaticResource RegisterButton_Style}"
-                                Command="{Binding RegisterCommand}"
+                                Command="{Binding CreateAccountCommand}"
                                 FontSize="12"
                                 FontFamily="Montserrat"
                                 Foreground="White"

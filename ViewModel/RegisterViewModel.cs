@@ -1,7 +1,15 @@
+using System;
+using System.Linq;
+using System.Net;
 using System.Security;
+using System.Security.Principal;
+using System.Threading;
+using System.Windows;
+using System.Windows.Input;
 using wpf_game_dev_cycle.Model;
 using wpf_game_dev_cycle.Repositories;
 using wpf_game_dev_cycle.Services;
+using wpf_game_dev_cycle.View;
 
 namespace wpf_game_dev_cycle.ViewModel
 {
@@ -16,6 +24,7 @@ namespace wpf_game_dev_cycle.ViewModel
         private IUserRepository _userRepository;
 
         private readonly RegistrationService _regService;
+        private readonly WindowNavigationService _navigationService;
         
         public string Username
         {
@@ -71,11 +80,60 @@ namespace wpf_game_dev_cycle.ViewModel
                 OnPropertyChanged(nameof(ErrorMessage));
             }
         }
-
-        public RegisterViewModel(RegistrationService regService)
+        
+        public ICommand ReturnWindowCommand { get; }
+        public ICommand RegisterCommand { get; }
+        public ICommand RecoverPasswordCommand { get; }
+        public ICommand ShowPasswordCommand { get; }
+        public ICommand RememberPasswordCommand { get; }
+        
+        public RegisterViewModel(RegistrationService regService, WindowNavigationService navigationService)
         {
             _regService = regService;
-            _userRepository = new UserRepository();
+            
+            _navigationService = navigationService;
+
+            _userRepository = new UserRepositoryControl();
+            ReturnWindowCommand = new RelayCommand(ExecuteReturnWindowCommand);
+            RegisterCommand = new RelayCommand(ExecuteRegisterCommand, CanExecuteRegisterCommand);
+            RecoverPasswordCommand = new RelayCommand(p => ExecuteRecoverPassCommand("", ""));
+        }
+
+        private void ExecuteRegisterCommand(object obj)
+        {
+            var isValidUser = _userRepository.AuthenticateUser(new NetworkCredential(Username, Password));
+            if (isValidUser)
+            {
+                Thread.CurrentPrincipal = new GenericPrincipal(
+                    new GenericIdentity(Username), null);
+
+                _regService.Register();
+            }
+            else
+            {
+                ErrorMessage = "* Invalid username or password";
+            }
+        }
+
+        private bool CanExecuteRegisterCommand(object obj)
+        {
+            bool validData;
+            if (string.IsNullOrWhiteSpace(Username) || Username.Length < 3 || Password == null || Password.Length < 3)
+                validData = false;
+            else
+                validData = true;
+
+            return validData;
+        }
+
+        private void ExecuteRecoverPassCommand(string username, string email)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void ExecuteReturnWindowCommand(object obj)
+        {
+            _navigationService.ChangeWindow(new LoginView());
         }
     }
 }

@@ -10,7 +10,7 @@ using wpf_game_dev_cycle.Model;
 
 namespace wpf_game_dev_cycle.Repositories
 {
-    public class UserRepository : RepositoryBase, IUserRepository
+    public class UserRepositoryControl : RepositoryBase, IUserRepository
     {
         public void Add(UserModel userModel)
         {

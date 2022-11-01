@@ -1,12 +1,15 @@
 ﻿using System;
+using System.Linq;
 using System.Net;
 using System.Security.Principal;
 using System.Security;
 using System.Threading;
+using System.Windows;
 using System.Windows.Input;
 using wpf_game_dev_cycle.Model;
 using wpf_game_dev_cycle.Repositories;
 using wpf_game_dev_cycle.Services;
+using wpf_game_dev_cycle.View;
 
 namespace wpf_game_dev_cycle.ViewModel
 {
@@ -20,7 +23,8 @@ namespace wpf_game_dev_cycle.ViewModel
         private IUserRepository _userRepository;
 
         private readonly LoginService _loginService;
-        
+        private readonly WindowNavigationService _navigationService;
+
         public string Username
         {
             get => _username;
@@ -66,19 +70,21 @@ namespace wpf_game_dev_cycle.ViewModel
         }
         
         public ICommand LoginCommand { get; }
-        public ICommand RegisterCommand { get; }
+        public ICommand CreateAccountCommand { get; }
         public ICommand RecoverPasswordCommand { get; }
         public ICommand ShowPasswordCommand { get; }
         public ICommand RememberPasswordCommand { get; }
         
-        public LoginViewModel(LoginService loginService)
+        public LoginViewModel(LoginService loginService, WindowNavigationService navigationService)
         {
-            _userRepository = new UserRepository();
-            LoginCommand = new RelayCommand(ExecuteLoginCommand, CanExecuteLoginCommand);
-            RegisterCommand = new RelayCommand(ExecuteRegisterCommand);
-            RecoverPasswordCommand = new RelayCommand(p => ExecuteRecoverPassCommand("", ""));
-
             _loginService = loginService;
+
+            _navigationService = navigationService;
+
+            _userRepository = new UserRepositoryControl();
+            LoginCommand = new RelayCommand(ExecuteLoginCommand, CanExecuteLoginCommand);
+            CreateAccountCommand = new RelayCommand(ExecuteCreateAccountCommand);
+            RecoverPasswordCommand = new RelayCommand(p => ExecuteRecoverPassCommand("", ""));
         }
 
         private bool CanExecuteLoginCommand(object obj)
@@ -114,9 +120,9 @@ namespace wpf_game_dev_cycle.ViewModel
             throw new NotImplementedException();
         }
 
-        private void ExecuteRegisterCommand(object obj)
+        private void ExecuteCreateAccountCommand(object obj)
         {
-            
+            _navigationService.ChangeWindow(new RegisterView());
         }
     }
 }
