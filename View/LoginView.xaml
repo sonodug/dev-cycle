@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:wpf_game_dev_cycle.View"
         xmlns:viewModel="clr-namespace:wpf_game_dev_cycle.ViewModel"
         xmlns:customControls="clr-namespace:wpf_game_dev_cycle.CustomControls"
+        DataContext="{Binding Path=LoginViewModel, Source={StaticResource ViewModelLocator}}"
         mc:Ignorable="d"
         Title="LoginView" Height="400" Width="500"
         WindowStyle="None"
@@ -14,9 +15,6 @@
         Background="Transparent"
         MouseDown="Window_MouseDown">
     
-    <Window.DataContext>
-        <viewModel:LoginViewModel/>
-    </Window.DataContext>
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibility"/>
     </Window.Resources>

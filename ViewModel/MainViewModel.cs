@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using wpf_game_dev_cycle.Model;
 using wpf_game_dev_cycle.Repositories;
+using wpf_game_dev_cycle.Services;
 
 namespace wpf_game_dev_cycle.ViewModel
 {
@@ -13,6 +14,8 @@ namespace wpf_game_dev_cycle.ViewModel
     {
         private UserAccountModel _currentUserAccount;
         private IUserRepository _userRepository;
+
+        private readonly LoginService _loginService;
 
         public UserAccountModel CurrentUserAccount
         {
@@ -25,11 +28,13 @@ namespace wpf_game_dev_cycle.ViewModel
             }
         }
 
-        public MainViewModel()
+        public MainViewModel(LoginService loginService)
         {
             _userRepository = new UserRepository();
             CurrentUserAccount = new UserAccountModel();
-            LoadCurrentUserData();
+            
+            _loginService = loginService;
+            _loginService.Logged += LoadCurrentUserData;
         }
 
         private void LoadCurrentUserData()

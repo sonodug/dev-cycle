@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using wpf_game_dev_cycle.Model;
 using wpf_game_dev_cycle.Repositories;
+using wpf_game_dev_cycle.Services;
 
 namespace wpf_game_dev_cycle.ViewModel
 {
@@ -22,6 +23,8 @@ namespace wpf_game_dev_cycle.ViewModel
         private bool _isViewVisible = true;
 
         private IUserRepository _userRepository;
+
+        private readonly LoginService _loginService;
 
         //Properties
         public string Username
@@ -87,11 +90,13 @@ namespace wpf_game_dev_cycle.ViewModel
         public ICommand RememberPasswordCommand { get; }
 
         //Constructor
-        public LoginViewModel()
+        public LoginViewModel(LoginService loginService)
         {
             _userRepository = new UserRepository();
             LoginCommand = new RelayCommand(ExecuteLoginCommand, CanExecuteLoginCommand);
             RecoverPasswordCommand = new RelayCommand(p => ExecuteRecoverPassCommand("", ""));
+
+            _loginService = loginService;
         }
 
         private bool CanExecuteLoginCommand(object obj)
@@ -112,6 +117,8 @@ namespace wpf_game_dev_cycle.ViewModel
             {
                 Thread.CurrentPrincipal = new GenericPrincipal(
                     new GenericIdentity(Username), null);
+
+                _loginService.Login();
                 IsViewVisible = false;
             }
             else
