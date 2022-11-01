@@ -13,7 +13,7 @@ namespace wpf_game_dev_cycle.Repositories
 
         public RepositoryBase()
         {
-            _connectionString = "Data Source=DESKTOP-CRH2BD2;Initial Catalog=mobiledb;Integrated Security=True";
+            _connectionString = "Data Source=DESKTOP-PAG57TP;Initial Catalog=company;Integrated Security=True";
         }
 
         protected SqlConnection GetConnection()

@@ -5,13 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:wpf_game_dev_cycle"
         xmlns:viewModel="clr-namespace:wpf_game_dev_cycle.ViewModel"
+        DataContext="{Binding Path=MainViewModel, Source={StaticResource ViewModelLocator}}"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800"
         WindowStartupLocation="CenterScreen">
-    
-    <Window.DataContext>
-        <viewModel:MainViewModel/>
-    </Window.DataContext>
 
     <Grid>
         <TextBlock Text="{Binding CurrentUserAccount.DisplayName}"

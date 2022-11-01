@@ -13,7 +13,7 @@ using wpf_game_dev_cycle.Repositories;
 
 namespace wpf_game_dev_cycle.ViewModel
 {
-    public class LoginViewModel : ViewModelBase
+    public class LoginViewModel : ObservableObject
     {
         //Fields
         private string _username;
@@ -90,8 +90,8 @@ namespace wpf_game_dev_cycle.ViewModel
         public LoginViewModel()
         {
             _userRepository = new UserRepository();
-            LoginCommand = new ViewModelCommand(ExecuteLoginCommand, CanExecuteLoginCommand);
-            RecoverPasswordCommand = new ViewModelCommand(p => ExecuteRecoverPassCommand("", ""));
+            LoginCommand = new RelayCommand(ExecuteLoginCommand, CanExecuteLoginCommand);
+            RecoverPasswordCommand = new RelayCommand(p => ExecuteRecoverPassCommand("", ""));
         }
 
         private bool CanExecuteLoginCommand(object obj)

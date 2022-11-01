@@ -27,5 +27,12 @@ namespace wpf_game_dev_cycle
                 }
             };
         }
+        
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            ViewModelLocator.Init();
+
+            base.OnStartup(e);
+        }
     }
 }

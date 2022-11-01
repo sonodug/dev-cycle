@@ -9,7 +9,7 @@ using wpf_game_dev_cycle.Repositories;
 
 namespace wpf_game_dev_cycle.ViewModel
 {
-    public class MainViewModel : ViewModelBase
+    public class MainViewModel : ObservableObject
     {
         private UserAccountModel _currentUserAccount;
         private IUserRepository _userRepository;

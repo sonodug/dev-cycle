@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace wpf_game_dev_cycle.ViewModel
 {
-    public abstract class ViewModelBase : INotifyPropertyChanged
+    public abstract class ObservableObject : INotifyPropertyChanged
     {
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         public void OnPropertyChanged(string propertyName)
         {

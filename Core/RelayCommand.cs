@@ -7,18 +7,18 @@ using System.Windows.Input;
 
 namespace wpf_game_dev_cycle.ViewModel
 {
-    public class ViewModelCommand : ICommand
+    public class RelayCommand : ICommand
     {
         //Fields
         private readonly Action<object> _executeAction;
         private readonly Predicate<object> _canExecuteAction;
         //Constructors
-        public ViewModelCommand(Action<object> executeAction)
+        public RelayCommand(Action<object> executeAction)
         {
             _executeAction = executeAction;
             _canExecuteAction = null;
         }
-        public ViewModelCommand(Action<object> executeAction, Predicate<object> canExecuteAction)
+        public RelayCommand(Action<object> executeAction, Predicate<object> canExecuteAction)
         {
             _executeAction = executeAction;
             _canExecuteAction = canExecuteAction;
