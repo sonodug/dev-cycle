@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:wpf_game_dev_cycle.View"
         xmlns:viewModel="clr-namespace:wpf_game_dev_cycle.ViewModel"
-        xmlns:customControls="clr-namespace:wpf_game_dev_cycle.CustomControls"
+        xmlns:CustomControls="clr-namespace:wpf_game_dev_cycle.CustomControls"
         DataContext="{Binding Path=LoginViewModel, Source={StaticResource ViewModelLocator}}"
         mc:Ignorable="d"
         Title="LoginView" Height="400" Width="500"
@@ -73,7 +73,8 @@
                                VerticalAlignment="Center"
                                Margin="10,0,0,0"/>
 
-                    <Button x:Name="btnMinimize"                           
+                    <Button Style="{StaticResource HeaderButton_Style}"
+                            x:Name="btnMinimize"                           
                             BorderThickness="0"
                             Content="-"
                             Foreground="White"
@@ -82,32 +83,10 @@
                             Cursor="Hand"
                             Grid.Column="1"
                             Click="btnMinimize_Click">
-
-                        <Button.Style>
-                            <Style TargetType="Button">
-                                <Setter Property="Background" Value="#202020"/>
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="#3B3C36"/>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Button.Style>
-
-                        <Button.Template>
-                            <ControlTemplate TargetType="Button">
-                                <Border Width="18" Height="18"
-                                        CornerRadius="9"
-                                        Background="{TemplateBinding Background}">
-                                    <ContentPresenter VerticalAlignment="Center"
-                                                      HorizontalAlignment="Center"/>
-                                </Border>
-                            </ControlTemplate>
-                        </Button.Template>
-
                     </Button>
 
-                    <Button x:Name="btnClose"                          
+                    <Button Style="{StaticResource HeaderButton_Style}"
+                            x:Name="btnClose"                          
                             BorderThickness="0"
                             Content="x"
                             Foreground="White"
@@ -116,28 +95,6 @@
                             Cursor="Hand"
                             Grid.Column="2"
                             Click="btnClose_Click">
-
-                        <Button.Style>
-                            <Style TargetType="Button">
-                                <Setter Property="Background" Value="#202020"/>
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="#3B3C36"/>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Button.Style>
-
-                        <Button.Template>
-                            <ControlTemplate TargetType="Button">
-                                <Border Width="18" Height="18"
-                                        CornerRadius="9"
-                                        Background="{TemplateBinding Background}">
-                                    <ContentPresenter VerticalAlignment="Center"
-                                                      HorizontalAlignment="Center"/>
-                                </Border>
-                            </ControlTemplate>
-                        </Button.Template>
                     </Button>
                 </Grid>
 
@@ -145,8 +102,7 @@
                             Grid.Row="1"
                             Orientation="Vertical"
                             Margin="0,35,0,0">
-
-
+                    
                     <TextBlock Text="Username"
                                Foreground="DarkGray"
                                FontSize="12"
@@ -154,7 +110,7 @@
                                FontFamily="Montserrat"                             
                                Margin="0,35,0,0"/>
 
-                    <TextBox x:Name="txtUser"
+                    <TextBox x:Name="Username"
                              Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}"
                              FontSize="13"
                              FontWeight="Medium"
@@ -176,11 +132,11 @@
                                FontFamily="Montserrat"                             
                                Margin="0,15,0,0"/>
 
-                    <customControls:BindablePasswordBox Password="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    <CustomControls:BindablePasswordBox Password="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                     Height="28"                            
                                                     Margin="0,5,0,0"
                                                     Background="DimGray">
-                    </customControls:BindablePasswordBox>
+                    </CustomControls:BindablePasswordBox>
 
                     <TextBlock Text="{Binding ErrorMessage}"
                            Foreground="#D7596D"
@@ -204,7 +160,7 @@
                     <Button Style="{StaticResource SignInButton_Style}"
                             Command="{Binding LoginCommand}"
                             BorderThickness="0"
-                            Content="SING IN"
+                            Content="SIGN IN"
                             Foreground="White"
                             FontSize="12"
                             FontFamily="Montserrat"

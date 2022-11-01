@@ -14,5 +14,7 @@ namespace wpf_game_dev_cycle.Model
         public string Name { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
+        public string PhoneNumber { get; set; }
+        public string VerificationCode { get; set; }
     }
 }

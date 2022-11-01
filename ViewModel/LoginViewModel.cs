@@ -12,7 +12,6 @@ namespace wpf_game_dev_cycle.ViewModel
 {
     public class LoginViewModel : ObservableObject
     {
-        //Fields
         private string _username;
         private SecureString _password;
         private string _errorMessage;
@@ -21,8 +20,7 @@ namespace wpf_game_dev_cycle.ViewModel
         private IUserRepository _userRepository;
 
         private readonly LoginService _loginService;
-
-        //Properties
+        
         public string Username
         {
             get => _username;
@@ -72,8 +70,7 @@ namespace wpf_game_dev_cycle.ViewModel
         public ICommand RecoverPasswordCommand { get; }
         public ICommand ShowPasswordCommand { get; }
         public ICommand RememberPasswordCommand { get; }
-
-        //Constructor
+        
         public LoginViewModel(LoginService loginService)
         {
             _userRepository = new UserRepository();
