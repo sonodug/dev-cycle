@@ -8,15 +8,40 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800"
         WindowStartupLocation="CenterScreen">
-
-    <Window.DataContext>
-        <viewModel:MainViewModel/>
-    </Window.DataContext>
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="20 8 20 8" />
+            <Setter Property="Width" Value="100" />
+            <Setter Property="Height" Value="30" />
+        </Style>
+    </Window.Resources>
     
     <Grid>
-        <TextBlock Text="{Binding CurrentUserAccount.DisplayName}"
-                   FontSize="30"
-                   HorizontalAlignment="Center"
-                   VerticalAlignment="Center"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        
+        <DataGrid AutoGenerateColumns="False" x:Name="accounts">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Id}" Header="Id" Width="100"/>
+                <DataGridTextColumn Binding="{Binding Username}" Header="Логин" Width="100"/>
+                <DataGridTextColumn Binding="{Binding Password}" Header="Пароль" Width="100"/>
+                <DataGridTextColumn Binding="{Binding Name}" Header="Имя" Width="100"/>
+                <DataGridTextColumn Binding="{Binding LastName}" Header="Фамилия" Width="100"/>
+                <DataGridTextColumn Binding="{Binding Email}" Header="Почта" Width="100"/>
+                <DataGridTextColumn Binding="{Binding Phone}" Header="Телефон" Width="110"/>
+                <DataGridTextColumn Binding="{Binding Verification_code}" Header="Код верификации" Width="110"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <StackPanel HorizontalAlignment="Center"  Grid.Row="1" Orientation="Vertical">
+            <Button x:Name="updateButton" Content="Обновить" Click="updateButton_Click"/>
+            <Button x:Name="deleteButton" Content="Удалить" Click="deleteButton_Click"/>
+            <TextBlock Text="{Binding CurrentUserAccount.DisplayName}"
+                       FontSize="30"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"/>
+        </StackPanel>
     </Grid>
 </Window>
