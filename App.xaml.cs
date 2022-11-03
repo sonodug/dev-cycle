@@ -13,17 +13,7 @@ namespace wpf_game_dev_cycle
             ViewModelLocator.Init();
             
             var loginView = new LoginView();
-
-            loginView.IsVisibleChanged += (s, ev) =>
-            {
-                if (loginView.IsVisible == false && loginView.IsLoaded)
-                {
-                    var mainView = new MainWindow();
-                    
-                    mainView.Show();
-                    loginView.Close();
-                }
-            };
+            loginView.Show();
         }
     }
 }

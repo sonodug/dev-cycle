@@ -19,7 +19,6 @@ namespace wpf_game_dev_cycle.ViewModel
         private string _username;
         private SecureString _password;
         private string _errorMessage;
-        private bool _isViewVisible = true;
 
         private IUserRepository _userRepository;
 
@@ -60,17 +59,6 @@ namespace wpf_game_dev_cycle.ViewModel
             }
         }
 
-        public bool IsViewVisible
-        {
-            get => _isViewVisible;
-
-            set
-            {
-                _isViewVisible = value;
-                OnPropertyChanged(nameof(IsViewVisible));
-            }
-        }
-        
         public ICommand LoginCommand { get; }
         public ICommand CreateAccountCommand { get; }
         public ICommand RecoverPasswordCommand { get; }
@@ -109,9 +97,9 @@ namespace wpf_game_dev_cycle.ViewModel
             {
                 Thread.CurrentPrincipal = new GenericPrincipal(
                     new GenericIdentity(Username), null);
-
+                
+                _navigationService.ChangeWindow(new MainWindow());
                 _loginService.Login();
-                IsViewVisible = false;
             }
             else
             {

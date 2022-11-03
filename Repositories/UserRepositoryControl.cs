@@ -19,7 +19,7 @@ namespace wpf_game_dev_cycle.Repositories
 
         public bool AuthenticateUser(NetworkCredential credential)
         {
-            bool validUser;
+            bool isUserValid;
 
             using (var connection = GetConnection())
             using (var command = new SqlCommand())
@@ -29,9 +29,38 @@ namespace wpf_game_dev_cycle.Repositories
                 command.CommandText = "select *from [Account] where username=@username and [password]=@password";
                 command.Parameters.Add("@username", SqlDbType.NVarChar).Value = credential.UserName;
                 command.Parameters.Add("@password", SqlDbType.NVarChar).Value = credential.Password;
-                validUser = command.ExecuteScalar() == null ? false : true;
+                
+                isUserValid = command.ExecuteScalar() == null ? false : true;
             }
-            return validUser;
+            return isUserValid;
+        }
+
+        public bool RegisterUser(NetworkCredential credential, string name, string lastname, string email, string phone)
+        {
+            bool isUserValid;
+            int result;
+            
+            using (var connection = GetConnection())
+            using (var command = new SqlCommand())
+            {
+                connection.Open();
+                command.Connection = connection;
+                command.CommandText = "insert into [Account] (id, username, password, name, lastname, email, phone)" +
+                                      "values (NEWID(), @username, @password, @name, @lastname, @email, @phone)";
+                command.Parameters.Add("@username", SqlDbType.NVarChar).Value = credential.UserName;
+                command.Parameters.Add("@password", SqlDbType.NVarChar).Value = credential.Password;
+                command.Parameters.Add("@name", SqlDbType.NVarChar).Value = name;
+                command.Parameters.Add("@lastname", SqlDbType.NVarChar).Value = lastname;
+                command.Parameters.Add("@email", SqlDbType.NVarChar).Value = email;
+                command.Parameters.Add("@phone", SqlDbType.NVarChar).Value = phone;
+                
+                result = command.ExecuteNonQuery();
+            }
+
+            if (result <= 0)
+                throw new Exception();
+
+            return true;
         }
 
         public void Edit(UserModel userModel)

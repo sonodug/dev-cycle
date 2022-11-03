@@ -19,13 +19,15 @@ namespace wpf_game_dev_cycle.ViewModel
     {
         private string _username;
         private SecureString _password;
+        private string _name;
+        private string _lastName;
         private string _email;
         private string _phoneNumber;
         private Page _pageSource;
         
         private string _errorMessage;
         private IUserRepository _userRepository;
-        
+
         private readonly PageService _pageService;
         private readonly RegistrationService _regService;
         private readonly WindowNavigationService _navigationService;
@@ -62,6 +64,28 @@ namespace wpf_game_dev_cycle.ViewModel
             }
         }
 
+        public string Name
+        {
+            get => _name;
+
+            set
+            {
+                _name = value;
+                OnPropertyChanged();
+            }
+        }
+        
+        public string LastName
+        {
+            get => _lastName;
+
+            set
+            {
+                _lastName = value;
+                OnPropertyChanged();
+            }
+        }
+        
         public string Email
         {
             get => _email;
@@ -79,7 +103,7 @@ namespace wpf_game_dev_cycle.ViewModel
 
             set
             {
-                _username = value;
+                _phoneNumber = value;
                 OnPropertyChanged();
             }
         }
@@ -103,14 +127,15 @@ namespace wpf_game_dev_cycle.ViewModel
         
         public RegisterViewModel(RegistrationService regService, WindowNavigationService navigationService, PageService pageService)
         {
-            _regService = regService;
-            
             _navigationService = navigationService;
+            
+            _regService = regService;
 
             _pageService = pageService;
             _pageService.PageChanged += (page) => PageSource = page;
 
             _userRepository = new UserRepositoryControl();
+
             ReturnWindowCommand = new RelayCommand(ExecuteReturnWindowCommand);
             RegisterCommand = new RelayCommand(ExecuteRegisterCommand, CanExecuteRegisterCommand);
             RecoverPasswordCommand = new RelayCommand(p => ExecuteRecoverPassCommand("", ""));
@@ -118,12 +143,14 @@ namespace wpf_game_dev_cycle.ViewModel
 
         private void ExecuteRegisterCommand(object obj)
         {
-            var isValidUser = _userRepository.AuthenticateUser(new NetworkCredential(Username, Password));
+            var isValidUser = _userRepository.RegisterUser(new NetworkCredential(Username, Password), Name, LastName, Email, PhoneNumber);
             if (isValidUser)
             {
                 Thread.CurrentPrincipal = new GenericPrincipal(
                     new GenericIdentity(Username), null);
-
+                
+                //tut changepage na email ver-n
+                _navigationService.ChangeWindow(new MainWindow());
                 _regService.Register();
             }
             else
@@ -150,7 +177,8 @@ namespace wpf_game_dev_cycle.ViewModel
 
         private void ExecuteReturnWindowCommand(object obj)
         {
-            //_navigationService.ChangeWindow(new LoginView());
+            //navigationService.ChangeWindow(new LoginView());
+            _pageService.ChangePage(new EmailVerificationPage());
         }
     }
 }

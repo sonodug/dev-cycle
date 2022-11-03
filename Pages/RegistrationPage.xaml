@@ -8,7 +8,7 @@
       xmlns:CustomControls="clr-namespace:wpf_game_dev_cycle.CustomControls"
       DataContext="{Binding Path=RegisterViewModel, Source={StaticResource ViewModelLocator}}"
       mc:Ignorable="d"
-      Title="RegistrationPage" Height="355" Width="230"
+      Title="RegistrationPage" Height="470" Width="230"
       Background="Transparent">
     
     <Page.Resources>
@@ -24,7 +24,7 @@
     <Grid>
         <StackPanel Width="220"
                     Orientation="Vertical"
-                    Margin="0,30,0,0">
+                    Margin="0,10,0,0">
                     
                     <TextBlock Text="Username"
                                Foreground="DarkGray"
@@ -61,6 +61,50 @@
                     </CustomControls:BindablePasswordBox>
                     
                     <TextBlock Text="Email"
+                               Foreground="DarkGray"
+                               FontSize="12"
+                               FontWeight="Medium"
+                               FontFamily="Montserrat"                             
+                               Margin="0,15,0,0"/>
+                    
+                    <TextBox x:Name="Name"
+                             Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"
+                             FontSize="13"
+                             FontWeight="Medium"
+                             FontFamily="Montserrat"                            
+                             Foreground="Black"
+                             CaretBrush="Black"
+                             BorderBrush="DarkGray"
+                             BorderThickness="0,0,0,3"
+                             Height="28"
+                             VerticalContentAlignment="Center"
+                             Margin="0,5,0,0"
+                             Padding="5,0,0,0">
+                    </TextBox>
+                    
+                    <TextBlock Text="Name"
+                               Foreground="DarkGray"
+                               FontSize="12"
+                               FontWeight="Medium"
+                               FontFamily="Montserrat"                             
+                               Margin="0,15,0,0"/>
+                    
+                    <TextBox x:Name="LastName"
+                             Text="{Binding LastName, UpdateSourceTrigger=PropertyChanged}"
+                             FontSize="13"
+                             FontWeight="Medium"
+                             FontFamily="Montserrat"                            
+                             Foreground="Black"
+                             CaretBrush="Black"
+                             BorderBrush="DarkGray"
+                             BorderThickness="0,0,0,3"
+                             Height="28"
+                             VerticalContentAlignment="Center"
+                             Margin="0,5,0,0"
+                             Padding="5,0,0,0">
+                    </TextBox>
+                    
+                    <TextBlock Text="LastName"
                                Foreground="DarkGray"
                                FontSize="12"
                                FontWeight="Medium"
@@ -113,6 +157,7 @@
                            TextWrapping="Wrap"/>
 
                     <Button Style="{StaticResource SignButton_Style}"
+                            Command="{Binding RegisterCommand}"
                             BorderThickness="0"
                             Content="SIGN UP"
                             Foreground="White"

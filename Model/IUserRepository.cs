@@ -10,6 +10,7 @@ namespace wpf_game_dev_cycle.Model
     public interface IUserRepository
     {
         bool AuthenticateUser(NetworkCredential credential);
+        bool RegisterUser(NetworkCredential credential, string name, string lastname, string email, string phone);
         void Add(UserModel userModel);
         void Edit(UserModel userModel);
         void Remove(int id);

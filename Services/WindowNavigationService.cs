@@ -9,8 +9,9 @@ namespace wpf_game_dev_cycle.Services
     {
         public event Action<Window> WindowChanged = (window) =>
         {
-            Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive).Close();
+            Window cur = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
             window.Show();
+            cur.Close();
         };
         
         public void ChangeWindow(Window window) => WindowChanged?.Invoke(window);

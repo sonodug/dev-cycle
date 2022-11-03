@@ -11,6 +11,7 @@ namespace wpf_game_dev_cycle.ViewModel
         private IUserRepository _userRepository;
 
         private readonly LoginService _loginService;
+        private readonly RegistrationService _registrationService;
 
         public UserAccountModel CurrentUserAccount
         {
@@ -23,13 +24,12 @@ namespace wpf_game_dev_cycle.ViewModel
             }
         }
 
-        public MainViewModel(LoginService loginService)
+        public MainViewModel()
         {
             _userRepository = new UserRepositoryControl();
             CurrentUserAccount = new UserAccountModel();
             
-            _loginService = loginService;
-            _loginService.Logged += LoadCurrentUserData;
+            LoadCurrentUserData();
         }
 
         private void LoadCurrentUserData()
