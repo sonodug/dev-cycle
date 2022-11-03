@@ -7,6 +7,7 @@ using System.Threading;
 using System.Windows;
 using System.Windows.Input;
 using wpf_game_dev_cycle.Model;
+using wpf_game_dev_cycle.Pages;
 using wpf_game_dev_cycle.Repositories;
 using wpf_game_dev_cycle.Services;
 using wpf_game_dev_cycle.View;
@@ -24,6 +25,7 @@ namespace wpf_game_dev_cycle.ViewModel
 
         private readonly LoginService _loginService;
         private readonly WindowNavigationService _navigationService;
+        private readonly PageService _pageService;
 
         public string Username
         {
@@ -75,8 +77,10 @@ namespace wpf_game_dev_cycle.ViewModel
         public ICommand ShowPasswordCommand { get; }
         public ICommand RememberPasswordCommand { get; }
         
-        public LoginViewModel(LoginService loginService, WindowNavigationService navigationService)
+        public LoginViewModel(LoginService loginService, WindowNavigationService navigationService, PageService pageService)
         {
+            _pageService = pageService;
+
             _loginService = loginService;
 
             _navigationService = navigationService;

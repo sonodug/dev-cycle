@@ -5,8 +5,10 @@ using System.Security;
 using System.Security.Principal;
 using System.Threading;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using wpf_game_dev_cycle.Model;
+using wpf_game_dev_cycle.Pages;
 using wpf_game_dev_cycle.Repositories;
 using wpf_game_dev_cycle.Services;
 using wpf_game_dev_cycle.View;
@@ -19,13 +21,25 @@ namespace wpf_game_dev_cycle.ViewModel
         private SecureString _password;
         private string _email;
         private string _phoneNumber;
-
+        private Page _pageSource;
+        
         private string _errorMessage;
         private IUserRepository _userRepository;
-
+        
+        private readonly PageService _pageService;
         private readonly RegistrationService _regService;
         private readonly WindowNavigationService _navigationService;
-        
+
+        public Page PageSource
+        {
+            get { return _pageSource; }
+            set
+            {
+                _pageSource = value;
+                OnPropertyChanged();
+            }
+        }
+
         public string Username
         {
             get => _username;
@@ -33,7 +47,7 @@ namespace wpf_game_dev_cycle.ViewModel
             set
             {
                 _username = value;
-                OnPropertyChanged(nameof(Username));
+                OnPropertyChanged();
             }
         }
 
@@ -44,7 +58,7 @@ namespace wpf_game_dev_cycle.ViewModel
             set
             {
                 _password = value;
-                OnPropertyChanged(nameof(Password));
+                OnPropertyChanged();
             }
         }
 
@@ -55,7 +69,7 @@ namespace wpf_game_dev_cycle.ViewModel
             set
             {
                 _email = value;
-                OnPropertyChanged(nameof(Email));
+                OnPropertyChanged();
             }
         }
         
@@ -66,7 +80,7 @@ namespace wpf_game_dev_cycle.ViewModel
             set
             {
                 _username = value;
-                OnPropertyChanged(nameof(PhoneNumber));
+                OnPropertyChanged();
             }
         }
         
@@ -77,7 +91,7 @@ namespace wpf_game_dev_cycle.ViewModel
             set
             {
                 _errorMessage = value;
-                OnPropertyChanged(nameof(ErrorMessage));
+                OnPropertyChanged();
             }
         }
         
@@ -87,11 +101,14 @@ namespace wpf_game_dev_cycle.ViewModel
         public ICommand ShowPasswordCommand { get; }
         public ICommand RememberPasswordCommand { get; }
         
-        public RegisterViewModel(RegistrationService regService, WindowNavigationService navigationService)
+        public RegisterViewModel(RegistrationService regService, WindowNavigationService navigationService, PageService pageService)
         {
             _regService = regService;
             
             _navigationService = navigationService;
+
+            _pageService = pageService;
+            _pageService.PageChanged += (page) => PageSource = page;
 
             _userRepository = new UserRepositoryControl();
             ReturnWindowCommand = new RelayCommand(ExecuteReturnWindowCommand);
@@ -133,7 +150,7 @@ namespace wpf_game_dev_cycle.ViewModel
 
         private void ExecuteReturnWindowCommand(object obj)
         {
-            _navigationService.ChangeWindow(new LoginView());
+            //_navigationService.ChangeWindow(new LoginView());
         }
     }
 }

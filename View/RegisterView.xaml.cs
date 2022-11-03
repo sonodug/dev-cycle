@@ -25,10 +25,5 @@ namespace wpf_game_dev_cycle.View
         {
             Application.Current.Shutdown();
         }
-
-        private void btnLogin_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
 }

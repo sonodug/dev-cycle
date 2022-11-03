@@ -19,7 +19,7 @@ namespace wpf_game_dev_cycle.ViewModel
             set
             {
                 _currentUserAccount = value;
-                OnPropertyChanged(nameof(CurrentUserAccount));
+                OnPropertyChanged();
             }
         }
 

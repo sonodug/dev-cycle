@@ -11,11 +11,9 @@ namespace wpf_game_dev_cycle
         protected void ApplicationStart(object sender, StartupEventArgs e)
         {
             ViewModelLocator.Init();
-
-            //var navigationService = new WindowNavigationService();
-            var loginView = new LoginView();
-            //navigationService.CurrentWindow = loginView;
             
+            var loginView = new LoginView();
+
             loginView.IsVisibleChanged += (s, ev) =>
             {
                 if (loginView.IsVisible == false && loginView.IsLoaded)

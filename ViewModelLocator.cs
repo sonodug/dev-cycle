@@ -12,13 +12,12 @@ namespace wpf_game_dev_cycle
         {
             var services = new ServiceCollection();
 
-            services.AddSingleton<WindowNavigationService>();
-            
             services.AddTransient<LoginViewModel>();
             services.AddTransient<RegisterViewModel>();
             services.AddSingleton<MainViewModel>();
             
             services.AddSingleton<PageService>();
+            services.AddSingleton<WindowNavigationService>();
             services.AddSingleton<LoginService>();
             services.AddSingleton<RegistrationService>();
 

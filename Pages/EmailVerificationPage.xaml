@@ -1,0 +1,16 @@
+<Page x:Class="wpf_game_dev_cycle.Pages.EmailVerificationPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:wpf_game_dev_cycle.Pages"
+      xmlns:viewModel="clr-namespace:wpf_game_dev_cycle.ViewModel"
+      xmlns:CustomControls="clr-namespace:wpf_game_dev_cycle.CustomControls"
+      DataContext="{Binding Path=RegisterViewModel, Source={StaticResource ViewModelLocator}}"
+      mc:Ignorable="d"
+      Title="EmailVerificationPage" Height="355" Width="230"
+      Background="BlueViolet">
+    <Grid>
+        
+    </Grid>
+</Page>

@@ -157,7 +157,7 @@
                                 Margin="0,25,0,0">
                         </Button>
 
-                    <Button Style="{StaticResource SignInButton_Style}"
+                    <Button Style="{StaticResource SignButton_Style}"
                             Command="{Binding LoginCommand}"
                             BorderThickness="0"
                             Content="SIGN IN"
