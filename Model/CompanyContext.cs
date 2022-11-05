@@ -4,11 +4,11 @@ namespace wpf_game_dev_cycle.Model
 {
     public class CompanyContext : DbContext
     {
-        public CompanyContext() : base("Data Source=DESKTOP-PAG57TP;Initial Catalog=company;Integrated Security=True")
+        public DbSet<admin_account> admin_accounts { get; set; }
+
+        public CompanyContext() : base("SQLServer connections")
         {
 
         }
-
-        public DbSet<Account> Accounts { get; set; }
     }
 }
