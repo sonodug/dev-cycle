@@ -6,6 +6,7 @@ using System.Security;
 using System.Threading;
 using System.Windows;
 using System.Windows.Input;
+using Microsoft.Extensions.Logging;
 using wpf_game_dev_cycle.Model;
 using wpf_game_dev_cycle.Pages;
 using wpf_game_dev_cycle.Repositories;
@@ -25,6 +26,9 @@ namespace wpf_game_dev_cycle.ViewModel
         private readonly LoginService _loginService;
         private readonly WindowNavigationService _navigationService;
         private readonly PageService _pageService;
+        
+        private readonly ILogger<RelayCommand> _logger;
+
 
         public string Username
         {
@@ -65,7 +69,8 @@ namespace wpf_game_dev_cycle.ViewModel
         public ICommand ShowPasswordCommand { get; }
         public ICommand RememberPasswordCommand { get; }
         
-        public LoginViewModel(LoginService loginService, WindowNavigationService navigationService, PageService pageService)
+        public LoginViewModel(LoginService loginService, WindowNavigationService navigationService,
+            PageService pageService)
         {
             _pageService = pageService;
 
@@ -74,6 +79,10 @@ namespace wpf_game_dev_cycle.ViewModel
             _navigationService = navigationService;
 
             _userRepository = new UserRepositoryControl();
+
+            CommandLoggerFactory loggerFactory = new CommandLoggerFactory(); 
+            _logger = loggerFactory.CreateLogger<RelayCommand>();
+            
             LoginCommand = new RelayCommand(ExecuteLoginCommand, CanExecuteLoginCommand);
             CreateAccountCommand = new RelayCommand(ExecuteCreateAccountCommand);
             RecoverPasswordCommand = new RelayCommand(p => ExecuteRecoverPassCommand("", ""));
@@ -92,6 +101,8 @@ namespace wpf_game_dev_cycle.ViewModel
 
         private void ExecuteLoginCommand(object obj)
         {
+            _logger.LogInformation("Loging starting");
+            
             var isValidUser = _userRepository.AuthenticateUser(new NetworkCredential(Username, Password));
             if (isValidUser)
             {
@@ -105,6 +116,8 @@ namespace wpf_game_dev_cycle.ViewModel
             {
                 ErrorMessage = "* Invalid username or password";
             }
+            
+            _logger.LogInformation("Loging succesfully executed");
         }
 
         private void ExecuteRecoverPassCommand(string username, string email)
@@ -114,6 +127,7 @@ namespace wpf_game_dev_cycle.ViewModel
 
         private void ExecuteCreateAccountCommand(object obj)
         {
+            _logger.LogInformation("Create account window");
             _navigationService.ChangeWindow(new RegisterView());
         }
     }

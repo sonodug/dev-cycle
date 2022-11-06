@@ -1,6 +1,7 @@
 ﻿
 using System.Data.Entity;
 using System.Windows;
+using System.Windows.Controls;
 using wpf_game_dev_cycle.Model;
 
 namespace wpf_game_dev_cycle
@@ -31,8 +32,6 @@ namespace wpf_game_dev_cycle
             { 
                 context.Database.ExecuteSqlCommand( 
                     "ALTER TABLE [company].[admin_account] ADD [email] [nvarchar](20) NULL");
-                
-                context.SaveChanges();
             }
         }
         

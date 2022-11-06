@@ -1,4 +1,6 @@
 ﻿using System.Windows;
+using Microsoft.Extensions.Logging;
+using Serilog;
 using wpf_game_dev_cycle.View;
 
 namespace wpf_game_dev_cycle
@@ -11,12 +13,12 @@ namespace wpf_game_dev_cycle
         protected void ApplicationStart(object sender, StartupEventArgs e)
         {
             ViewModelLocator.Init();
-            
-            // var loginView = new LoginView();
-            // loginView.Show();
 
-            var mainView = new MainWindow();
-            mainView.Show();
+            var loginView = new LoginView();
+            loginView.Show();
+
+            //var mainView = new MainWindow();
+            //mainView.Show();
         }
     }
 }
