@@ -29,8 +29,10 @@
                       Height="30"
                       ItemsSource="{Binding TableItems}"
                       SelectedItem="{Binding SelectedTable}"
-                      DisplayMemberPath="Name"/>
-            <DataGrid AutoGenerateColumns="True"
+                      DisplayMemberPath="Name"
+                      SelectedIndex="0"/>
+            <DataGrid x:Name="bb" 
+                      AutoGenerateColumns="True"
                       HorizontalAlignment="Left"
                       Width="600"
                       Height="300"
@@ -41,7 +43,15 @@
             <Button Content="Обновить"
                     Command="{Binding UpdateCommand}"/>
             <Button Content="Удалить"
-                    Command="{Binding DeleteRowCommand}"/>
+                    Command="{Binding DeleteRowCommand}"
+                    Click="deleteButton_Click"/>
+            <TextBlock Text="{Binding ExpressionLabel}"
+                       VerticalAlignment="Center"
+                       FontSize="15"/>
+            <TextBox Text="{Binding SelectedComparisons}"
+                     Width="100"/>
+            <Button Content="Select"
+                    Command="{Binding SelectCommand}"/>
         </StackPanel>
     </Grid>
 </Window>

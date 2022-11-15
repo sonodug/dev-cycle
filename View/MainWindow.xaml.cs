@@ -15,28 +15,19 @@ namespace wpf_game_dev_cycle
         public MainWindow()
         {
             InitializeComponent();
+            
         }
-        
-        // private void selectByIdButton_Click(object sender, RoutedEventArgs e)
-        // {
-        //     using (var context = new CompanyContext())
-        //     {
-        //         int id;
-        //         if (int.TryParse(textbox.Text, out id))
-        //         {
-        //             var ad_accounts = db.AdministratorAccounts.Where(p=> p.Account_id == id);
-        //             accounts.ItemsSource = ad_accounts.ToList();
-        //         }
-        //         else
-        //             return;
-        //     }
-        // }
-        //
+
         // private void returnSelectByIdButton_Click(object sender, RoutedEventArgs e)
         // {
         //     var ad_accounts = db.AdministratorAccounts;
         //     accounts.ItemsSource = ad_accounts.ToList();
         // }
         //
+
+        private void deleteButton_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
     }
 }

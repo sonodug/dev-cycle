@@ -1,3 +1,4 @@
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
@@ -7,10 +8,10 @@ namespace wpf_game_dev_cycle.Model
     public class CompanyContext : DbContext
     {
         public DbSet<AdministratorAccount> AdministratorAccounts { get; set; }
+        public DbSet<Publisher> Publishers { get; set; }
         public DbSet<PublisherAccount> PublisherAccounts { get; set; }
-        // public DbSet<Publisher> Publishers { get; set; }
+        public DbSet<Employee> Employees { get; set; }
         // public DbSet<Developer> Developers { get; set; }
-        // public DbSet<Employee> Employees { get; set; }
         // public DbSet<DeveloperAccount> DeveloperAccounts { get; set; }
         // public DbSet<Verification> Verifications { get; set; }
         // public DbSet<Customer> Customers { get; set; }
@@ -30,37 +31,44 @@ namespace wpf_game_dev_cycle.Model
         public string Name { get; set; }
     }
 
-    public abstract class Entity
-    {
-        
-    }
+    public abstract class Entity {}
 
     [Table("admin_account", Schema = "company")]
     public class AdministratorAccount : Entity
     {
         [Key] public int Account_id { get; set; }
-        
         public string Login { get; set; }
         public string Password { get; set; }
+    }
+    
+    [Table("employee", Schema = "company")]
+    public class Employee : Entity
+    {
+        [Key] public string Employee_code { get; set; }
+        public string Full_name { get; set; }
+        public string Position { get; set; }
+        public DateTime Birth_date { get; set; }
+        public DateTime Registration_date { get; set; }
+        public string Education { get; set; }
+    }
+    
+    [Table("publisher", Schema = "company")]
+    public class Publisher : Entity
+    {
+        [Key] public string Employee_code { get; set; }
     }
     
     [Table("publisher_account", Schema = "company")]
     public class PublisherAccount : Entity
     {
-        public string Password { get; set; }
-        public string Login { get; set; }
         [Key] public int Account_id { get; set; }
+        public string Login { get; set; }
+        public string Password { get; set; }
         public string Email { get; set; }
         public string Phone_number { get; set; }
         public string Employee_code { get; set; }
     }
-    //
-    // [Table("publisher", Schema = "company")]
-    // public class Publisher
-    // {
-    //     [Key] public string Employee_code { get; set; }
-    // }
-    //
+
     // [Table("developer", Schema = "company")]
     // public class Developer
     // {
@@ -72,19 +80,7 @@ namespace wpf_game_dev_cycle.Model
     //     public string Technology_stack { get; set; }
     // }
     //
-    // [Table("employee", Schema = "company")]
-    // public class Employee
-    // {
-    //     [Key]
-    //     public string Employee_code { get; set; }
-    //     
-    //     public string Full_name { get; set; }
-    //     public string Position { get; set; }
-    //     public string Birth_date { get; set; }
-    //     public string Registration_date { get; set; }
-    //     public string Education { get; set; }
-    // }
-    //
+    
     // [Table("developer_account", Schema = "company")]
     // public class DeveloperAccount
     // {
