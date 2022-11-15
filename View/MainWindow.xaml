@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:wpf_game_dev_cycle"
         xmlns:viewModel="clr-namespace:wpf_game_dev_cycle.ViewModel"
+        DataContext="{Binding Path=MainViewModel, Source={StaticResource ViewModelLocator}}"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800"
         WindowStartupLocation="CenterScreen">
@@ -18,23 +19,29 @@
     
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        
-        <DataGrid AutoGenerateColumns="False" x:Name="accounts"
-                  Width="200">
-            <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding Login}" Header="Логин" Width="100"/>
-                <DataGridTextColumn Binding="{Binding Password}" Header="Пароль" Width="100"/>
-            </DataGrid.Columns>
-        </DataGrid>
-
-        <StackPanel HorizontalAlignment="Center"  Grid.Row="1" Orientation="Vertical">
-            <Button x:Name="updateButton" Content="Обновить" Click="updateButton_Click"/>
-            <Button x:Name="deleteButton" Content="Удалить" Click="deleteButton_Click"/>
-            <Button x:Name="addcolumnButton" Content="Добавить столбец" Click="addcolumnButton_Click"/>
-            <Button x:Name="deletecolumnButton" Content="Удалить столбец" Click="deletecolumnButton_Click"/>
+        <StackPanel>
+            <ComboBox HorizontalAlignment="Right"
+                      VerticalAlignment="Top"
+                      Width="180"
+                      Height="30"
+                      ItemsSource="{Binding TableItems}"
+                      SelectedItem="{Binding SelectedTable}"
+                      DisplayMemberPath="Name"/>
+            <DataGrid AutoGenerateColumns="True"
+                      HorizontalAlignment="Left"
+                      Width="600"
+                      Height="300"
+                      ItemsSource="{Binding SelectedTableToList}"
+                      SelectedItem="{Binding SelectedTableItem}"/>
+        </StackPanel>
+        <StackPanel HorizontalAlignment="Center"  Grid.Row="1" Orientation="Horizontal">
+            <Button Content="Обновить"
+                    Command="{Binding UpdateCommand}"/>
+            <Button Content="Удалить"
+                    Command="{Binding DeleteRowCommand}"/>
         </StackPanel>
     </Grid>
 </Window>

@@ -73,7 +73,7 @@ namespace wpf_game_dev_cycle.ViewModel
             PageService pageService)
         {
             _pageService = pageService;
-
+            
             _loginService = loginService;
 
             _navigationService = navigationService;

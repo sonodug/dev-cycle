@@ -15,7 +15,7 @@ namespace wpf_game_dev_cycle
 
             services.AddTransient<LoginViewModel>();
             services.AddTransient<RegisterViewModel>();
-            //services.AddTransient<MainViewModel>();
+            services.AddTransient<MainViewModel>();
             
             services.AddSingleton<PageService>();
             services.AddSingleton<WindowNavigationService>();
@@ -32,6 +32,6 @@ namespace wpf_game_dev_cycle
 
         public LoginViewModel LoginViewModel => _provider.GetRequiredService<LoginViewModel>();
         public RegisterViewModel RegisterViewModel => _provider.GetRequiredService<RegisterViewModel>();
-        //public MainViewModel MainViewModel => _provider.GetRequiredService<MainViewModel>();
+        public MainViewModel MainViewModel => _provider.GetRequiredService<MainViewModel>();
     }
 }

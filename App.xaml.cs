@@ -14,11 +14,11 @@ namespace wpf_game_dev_cycle
         {
             ViewModelLocator.Init();
 
-            var loginView = new LoginView();
-            loginView.Show();
+            // var loginView = new LoginView();
+            // loginView.Show();
 
-            //var mainView = new MainWindow();
-            //mainView.Show();
+            var mainView = new MainWindow();
+            mainView.Show();
         }
     }
 }
