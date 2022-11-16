@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.ObjectModel;
 using System.Data.Entity.Validation;
 using System.Linq;
@@ -16,12 +17,13 @@ namespace wpf_game_dev_cycle.ViewModel
 {
     public class MainViewModel : ObservableObject
     {
-        private readonly CompanyContext _database;
+        private CompanyContext _database;
 
         private Table? _selectedTable;
         private IEnumerable _selectedTableToList;
         private Entity _selectedTableItem;
         
+        private string _sqlExecutionText;
         private string _selectedComparisons;
         private string _expressionLabel;
 
@@ -33,7 +35,18 @@ namespace wpf_game_dev_cycle.ViewModel
         public ICommand UpdateCommand { get; }
         public ICommand DeleteRowCommand { get; }
         public ICommand SelectCommand { get; }
+        public ICommand SqlCommand { get; }
 
+        public string SqlExecutionText
+        {
+            get => _sqlExecutionText;
+            set
+            {
+                _sqlExecutionText = value;
+                OnPropertyChanged();
+            }
+        }
+        
         public string SelectedComparisons
         {
             get => _selectedComparisons;
@@ -43,6 +56,7 @@ namespace wpf_game_dev_cycle.ViewModel
                 OnPropertyChanged();
             }
         }
+        
         public string ExpressionLabel
         {
             get => _expressionLabel;
@@ -68,29 +82,34 @@ namespace wpf_game_dev_cycle.ViewModel
             get => _selectedTable;
             set
             {
-                if (value.Name == "Admin_account")
-                {
-                    SelectedTableToList = _database.AdministratorAccounts.Local.ToBindingList();
-                    ExpressionLabel = "Selecting by Account_id";
-                }
-                else if (value.Name == "Employees")
-                {
-                    SelectedTableToList = _database.Employees.Local.ToBindingList();
-                    ExpressionLabel = "Selecting by Employee_code";
-                }
-                else if (value.Name == "Publisher")
-                {
-                    SelectedTableToList = _database.Publishers.Local.ToBindingList();
-                    ExpressionLabel = "Selecting by Employee_code";
-                }
-                else if (value.Name == "Publisher_account")
-                {
-                    SelectedTableToList = _database.PublisherAccounts.Local.ToBindingList();
-                    ExpressionLabel = "Selecting by Account_id";
-                }
+                UpdateCurrentInterfaceTable(value);
 
                 _selectedTable = value;
                 OnPropertyChanged();
+            }
+        }
+
+        private void UpdateCurrentInterfaceTable(Table? value)
+        {
+            if (value.Name == "Admin_account")
+            {
+                SelectedTableToList = _database.AdministratorAccounts.Local.ToBindingList();
+                ExpressionLabel = "Selecting by Account_id";
+            }
+            else if (value.Name == "Employees")
+            {
+                SelectedTableToList = _database.Employees.Local.ToBindingList();
+                ExpressionLabel = "Selecting by Employee_code";
+            }
+            else if (value.Name == "Publisher")
+            {
+                SelectedTableToList = _database.Publishers.Local.ToBindingList();
+                ExpressionLabel = "Selecting by Employee_code";
+            }
+            else if (value.Name == "Publisher_account")
+            {
+                SelectedTableToList = _database.PublisherAccounts.Local.ToBindingList();
+                ExpressionLabel = "Selecting by Account_id";
             }
         }
 
@@ -117,13 +136,14 @@ namespace wpf_game_dev_cycle.ViewModel
         public MainViewModel()
         {
             _database = new CompanyContext();
-            AddTables();
+            AddTablesList();
             InitializeSets();
 
             UpdateCommand = new RelayCommand(ExecuteUpdateCommand, CanExecuteUpdateCommand);
             DeleteRowCommand = new RelayCommand(ExecuteDeleteRowCommand, CanExecuteDeleteRowCommand);
             SelectCommand = new RelayCommand(ExecuteSelectCommand, CanExecuteSelectCommand);
-            
+            SqlCommand = new RelayCommand(ExecuteSqlCommand, CanExecuteSqlCommand);
+
             // _userRepository = new UserRepositoryControl();
             // CurrentUserAccount = new UserAccountModel();
 
@@ -255,6 +275,26 @@ namespace wpf_game_dev_cycle.ViewModel
             return true;
         }
         
+        private void ExecuteSqlCommand(object obj)
+        {
+            try
+            {
+                _database.Database.ExecuteSqlCommand(SqlExecutionText);
+                _database = new CompanyContext();
+                InitializeSets();
+                UpdateCurrentInterfaceTable(SelectedTable);
+            }
+            catch (Exception e)
+            {
+                // mb??
+            }
+        }
+
+        private bool CanExecuteSqlCommand(object obj)
+        {
+            return true;
+        }
+        
         private void LoadCurrentUserData()
         {
             var user = _userRepository.GetByUsername(Thread.CurrentPrincipal.Identity.Name);
@@ -270,7 +310,7 @@ namespace wpf_game_dev_cycle.ViewModel
             }
         }
 
-        private void AddTables()
+        private void AddTablesList()
         {
             TableItems = new ObservableCollection<Table>
             {
