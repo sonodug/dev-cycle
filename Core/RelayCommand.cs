@@ -10,7 +10,7 @@ namespace wpf_game_dev_cycle.ViewModel
     public class RelayCommand : ICommand
     {
         private readonly Action<object> _executeAction;
-        private readonly Predicate<object> _canExecuteAction;
+        private readonly Predicate<object>? _canExecuteAction;
         
         public RelayCommand(Action<object> executeAction)
         {
@@ -18,7 +18,7 @@ namespace wpf_game_dev_cycle.ViewModel
             _canExecuteAction = null;
         }
         
-        public RelayCommand(Action<object> executeAction, Predicate<object> canExecuteAction)
+        public RelayCommand(Action<object> executeAction, Predicate<object>? canExecuteAction = null)
         {
             _executeAction = executeAction;
             _canExecuteAction = canExecuteAction;

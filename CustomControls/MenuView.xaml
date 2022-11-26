@@ -1,0 +1,28 @@
+<UserControl x:Class="wpf_game_dev_cycle.CustomControls.MenuView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:wpf_game_dev_cycle.CustomControls"
+             mc:Ignorable="d"
+             DataContext="{Binding MenuViewModel, Source={StaticResource ViewModelLocator}}"
+             d:DesignHeight="500" d:DesignWidth="200">
+
+    <Control.Resources>
+        <ResourceDictionary Source="pack://application:,,,/wpf-game-dev-cycle;component/Styles/MenuStyles.xaml"/>
+    </Control.Resources>
+    
+    <Grid Background="#212529"
+          Visibility="Visible">
+
+        <ListView ItemsSource="{Binding MenuItems}"
+                  SelectedItem="{Binding SelectedMenuItem}"
+                  Background="Transparent"
+                  BorderThickness="0"
+                  ItemContainerStyle="{StaticResource MenuItemStyle}"
+                  VerticalAlignment="Top"
+                  Margin="0,10,0,0">
+
+        </ListView>
+    </Grid>
+</UserControl>

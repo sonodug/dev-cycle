@@ -24,10 +24,5 @@ namespace wpf_game_dev_cycle
         //     accounts.ItemsSource = ad_accounts.ToList();
         // }
         //
-
-        private void deleteButton_Click(object sender, RoutedEventArgs e)
-        {
-            
-        }
     }
 }

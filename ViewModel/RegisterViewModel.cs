@@ -121,10 +121,7 @@ namespace wpf_game_dev_cycle.ViewModel
         
         public ICommand ReturnWindowCommand { get; }
         public ICommand RegisterCommand { get; }
-        public ICommand RecoverPasswordCommand { get; }
-        public ICommand ShowPasswordCommand { get; }
-        public ICommand RememberPasswordCommand { get; }
-        
+
         public RegisterViewModel(RegistrationService regService, WindowNavigationService navigationService, PageService pageService)
         {
             _navigationService = navigationService;
@@ -138,7 +135,6 @@ namespace wpf_game_dev_cycle.ViewModel
 
             ReturnWindowCommand = new RelayCommand(ExecuteReturnWindowCommand);
             RegisterCommand = new RelayCommand(ExecuteRegisterCommand, CanExecuteRegisterCommand);
-            RecoverPasswordCommand = new RelayCommand(p => ExecuteRecoverPassCommand("", ""));
         }
 
         private void ExecuteRegisterCommand(object obj)
@@ -149,8 +145,7 @@ namespace wpf_game_dev_cycle.ViewModel
                 Thread.CurrentPrincipal = new GenericPrincipal(
                     new GenericIdentity(Username), null);
                 
-                //tut changepage na email ver-n
-                _navigationService.ChangeWindow(new MainWindow());
+                _pageService.ChangePage(new EmailVerificationPage());
                 _regService.Register();
             }
             else
@@ -170,15 +165,9 @@ namespace wpf_game_dev_cycle.ViewModel
             return validData;
         }
 
-        private void ExecuteRecoverPassCommand(string username, string email)
-        {
-            throw new NotImplementedException();
-        }
-
         private void ExecuteReturnWindowCommand(object obj)
         {
-            //navigationService.ChangeWindow(new LoginView());
-            _pageService.ChangePage(new EmailVerificationPage());
+            _navigationService.ChangeWindow(new LoginView());
         }
     }
 }

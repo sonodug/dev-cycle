@@ -56,8 +56,7 @@
             <Button Content="Update database"
                     Command="{Binding UpdateCommand}"/>
             <Button Content="Delete"
-                    Command="{Binding DeleteRowCommand}"
-                    Click="deleteButton_Click"/>
+                    Command="{Binding DeleteRowCommand}"/>
             <TextBlock Text="{Binding ExpressionLabel}"
                        VerticalAlignment="Center"
                        FontSize="15"/>

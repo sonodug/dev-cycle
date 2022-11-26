@@ -1,0 +1,97 @@
+<Window x:Class="wpf_game_dev_cycle.View.AdminView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:wpf_game_dev_cycle.View"
+        xmlns:uc="clr-namespace:wpf_game_dev_cycle.CustomControls"
+        DataContext="{Binding Path=AdminViewModel, Source={StaticResource ViewModelLocator}}"
+        mc:Ignorable="d"
+        Title="AdminWindow" Height="600" Width="1000"
+        Background="Black"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        BorderThickness="1"
+        BorderBrush="Black"
+        AllowsTransparency="True"
+        ResizeMode="CanResizeWithGrip">
+        
+        <Window.Resources>
+                <ResourceDictionary>
+                        <ResourceDictionary.MergedDictionaries>
+                                <ResourceDictionary Source="/Styles/ButtonStyles.xaml"/>
+                        </ResourceDictionary.MergedDictionaries>
+                </ResourceDictionary>
+        </Window.Resources>
+        
+        <Grid>
+                <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="1"/>
+                        <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                
+                <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="200"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="150"/>
+                        <ColumnDefinition Width="120"/>
+                </Grid.ColumnDefinitions>
+                
+                <GridSplitter Grid.Column="1"
+                              Grid.Row="2"
+                              ShowsPreview="False"
+                              Width="4"
+                              HorizontalAlignment="Left"
+                              VerticalAlignment="Stretch"
+                              ResizeBehavior="PreviousAndNext"
+                              ResizeDirection="Columns"
+                              Background="#212529"/>
+                
+                <Border Grid.Row="0"
+                        Grid.ColumnSpan="4"
+                        Background="#212729"
+                        MouseDown="Border_MouseDown"/>
+                
+                <Border Grid.Row="0" Grid.ColumnSpan="1">
+                        <TextBlock Text="Administrator"
+                                   Foreground="DarkGray"
+                                   FontSize="14"
+                                   FontFamily="Montserrat"
+                                   VerticalAlignment="Center"
+                                   Margin="10,5,0,0"/>
+                </Border>
+                
+                <Border Grid.Column="3">
+                        <StackPanel HorizontalAlignment="Right"
+                                    Orientation="Horizontal">
+                                <Button Content="-"
+                                        Padding="0,0,0,12"
+                                        Click="ButtonMinimize_Click"
+                                        Style="{StaticResource WindowConfigureButton_Style}"/>
+
+                                <Button Content="☐"
+                                        Click="ButtonMaximize_Click"
+                                        Style="{StaticResource WindowConfigureButton_Style}"/>
+
+                                <Button Content="✕"
+                                        Click="CloseButton_Click"
+                                        Style="{StaticResource WindowConfigureButton_Style}"/>
+                        </StackPanel>
+                </Border>
+                
+                <Grid Grid.Row="2"
+                      Grid.Column="0"
+                      Background="#212529"
+                      Visibility="Visible">
+                        
+                        <uc:MenuView/>
+                </Grid>
+                
+                <Frame Grid.Row="2"
+                       Grid.Column="1"
+                       Grid.ColumnSpan="3"
+                       Content="{Binding MainPageSource}"
+                       NavigationUIVisibility="Hidden"/>
+        </Grid>
+</Window>
