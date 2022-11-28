@@ -6,7 +6,6 @@
       xmlns:local="clr-namespace:wpf_game_dev_cycle.Pages.Admin"
       DataContext="{Binding Path=AdminViewModel, Source={StaticResource ViewModelLocator}}"
       mc:Ignorable="d"
-      Background="White"
       Height="570" Width="800"
       Title="TablesPage">
     <Grid>

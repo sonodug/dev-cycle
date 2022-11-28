@@ -11,8 +11,8 @@ namespace wpf_game_dev_cycle.Model
         public DbSet<Publisher> Publishers { get; set; }
         public DbSet<PublisherAccount> PublisherAccounts { get; set; }
         public DbSet<Employee> Employees { get; set; }
-        // public DbSet<Developer> Developers { get; set; }
-        // public DbSet<DeveloperAccount> DeveloperAccounts { get; set; }
+        public DbSet<DeveloperAccount> DeveloperAccounts { get; set; }
+        public DbSet<Developer> Developers { get; set; }
         // public DbSet<Verification> Verifications { get; set; }
         // public DbSet<Customer> Customers { get; set; }
         // public DbSet<Contract> Contracts { get; set; }
@@ -69,31 +69,30 @@ namespace wpf_game_dev_cycle.Model
         public string Employee_code { get; set; }
     }
 
-    // [Table("developer", Schema = "company")]
-    // public class Developer
-    // {
-    //     [Key] public string Employee_code { get; set; }
-    //     
-    //     public string Employment_date { get; set; }
-    //     public string Status_of_dismissal { get; set; }
-    //     public string Status_of_work_on_the_project { get; set; }
-    //     public string Technology_stack { get; set; }
-    // }
-    //
+    [Table("developer", Schema = "company")]
+    public class Developer
+    {
+        [Key] public string Employee_code { get; set; }
+        
+        public DateTime Employment_date { get; set; }
+        public string Status_of_dismissal { get; set; }
+        public string Status_of_work_on_the_project { get; set; }
+        public string Technology_stack { get; set; }
+    }
     
-    // [Table("developer_account", Schema = "company")]
-    // public class DeveloperAccount
-    // {
-    //     [Key] public int Account_id { get; set; }
-    //     [Key] public string Employee_code { get; set; }
-    //     
-    //     public string Full_name { get; set; }
-    //     public string Position { get; set; }
-    //     public string Birth_date { get; set; }
-    //     public string Registration_date { get; set; }
-    //     public string Education { get; set; }
-    // }
-    //
+    
+    [Table("developer_account", Schema = "company")]
+    public class DeveloperAccount
+    {
+        [Key, Column(Order = 0)] public string Login { get; set; }
+        [Key, Column(Order = 1)] public string Password { get; set; }
+        [Key, Column(Order = 2)] public int Account_id { get; set; }
+        [Key, Column(Order = 3)] public string Email { get; set; }
+        [Key, Column(Order = 4)] public string Phone_number { get; set; }
+        [Key, Column(Order = 5)] public string Verification_code { get; set; }
+        [Key, Column(Order = 6)] public string Employee_code { get; set; }
+    }
+    
     // [Table("verification", Schema = "company")]
     // public class Verification
     // {

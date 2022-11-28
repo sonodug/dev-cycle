@@ -49,11 +49,12 @@
                               Background="#212529"/>
                 
                 <Border Grid.Row="0"
-                        Grid.ColumnSpan="4"
+                        Grid.ColumnSpan="4" Grid.Column="0"
                         Background="#212729"
                         MouseDown="Border_MouseDown"/>
                 
-                <Border Grid.Row="0" Grid.ColumnSpan="1">
+                <Border Grid.Row="0"
+                        Grid.ColumnSpan="1" Grid.Column="0">
                         <TextBlock Text="Administrator"
                                    Foreground="DarkGray"
                                    FontSize="14"

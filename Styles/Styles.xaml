@@ -1,4 +1,29 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     
+    <Style TargetType="ListViewItem" x:Key="FilterItemStyle">
+
+        <Style.Triggers>
+            <Trigger Property="IsSelected" Value="True" x:Name="IsSelected">
+                <Setter Property="Foreground" Value="IndianRed"/>
+            </Trigger>
+        </Style.Triggers>
+        
+        <Setter Property="Foreground" Value="Black"/>
+        
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListViewItem">
+                    <StackPanel Orientation="Vertical"
+                                Margin="10,0,0,0">
+                        <Label Content="{Binding FilterName}"
+                               Foreground="{TemplateBinding Foreground}"
+                               FontSize="16"
+                               VerticalAlignment="Center"
+                               FontFamily="Montserrat"/>
+                    </StackPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>

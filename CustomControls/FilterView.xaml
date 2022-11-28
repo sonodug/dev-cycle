@@ -1,0 +1,32 @@
+<UserControl x:Class="wpf_game_dev_cycle.CustomControls.FilterView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:wpf_game_dev_cycle.CustomControls"
+             mc:Ignorable="d"
+             Background="LightBlue"
+             DataContext="{Binding FilterViewModel, Source={StaticResource ViewModelLocator}}"
+             Height="100" Width="800">
+    
+    <UserControl.Resources>
+        <ResourceDictionary Source="pack://application:,,,/wpf-game-dev-cycle;component/Styles/Styles.xaml"/>
+    </UserControl.Resources>
+    
+    <Grid>
+        <ListView ItemsSource="{Binding FilterItems}"
+                  SelectedItem="{Binding SelectedFilterItem}"
+                  Background="Transparent"
+                  BorderThickness="0"
+                  ItemContainerStyle="{StaticResource FilterItemStyle}"
+                  VerticalAlignment="Center"
+                  Margin="0,10,0,0"
+                  Cursor="Hand">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+        </ListView>
+    </Grid>
+</UserControl>
