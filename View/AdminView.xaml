@@ -38,16 +38,6 @@
                         <ColumnDefinition Width="120"/>
                 </Grid.ColumnDefinitions>
                 
-                <GridSplitter Grid.Column="1"
-                              Grid.Row="2"
-                              ShowsPreview="False"
-                              Width="4"
-                              HorizontalAlignment="Left"
-                              VerticalAlignment="Stretch"
-                              ResizeBehavior="PreviousAndNext"
-                              ResizeDirection="Columns"
-                              Background="#212529"/>
-                
                 <Border Grid.Row="0"
                         Grid.ColumnSpan="4" Grid.Column="0"
                         Background="#212729"

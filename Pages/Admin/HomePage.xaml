@@ -5,9 +5,12 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:wpf_game_dev_cycle.Pages.Admin"
       mc:Ignorable="d"
+      Background="LightBlue"
       Height="570" Width="800"
       Title="HomePage">
     <Grid>
-        
+        <Label Content="Hi"
+               FontSize="26"
+               FontFamily="Monserrat"/>
     </Grid>
 </Page>

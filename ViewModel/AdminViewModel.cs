@@ -29,7 +29,7 @@ namespace wpf_game_dev_cycle.ViewModel
 
         private Page _mainPageSource;
 
-        private PageService _pageService;
+        private PageServiceFirstNest _pageServiceFirstNest;
         
         public ObservableCollection<Table> TableItems { get; set; }
 
@@ -120,7 +120,7 @@ namespace wpf_game_dev_cycle.ViewModel
             }
         }
 
-        public AdminViewModel(PageService pageService)
+        public AdminViewModel(PageServiceFirstNest pageServiceFirstNest)
         {
             _database = new CompanyContext();
             AddTablesList();
@@ -131,8 +131,8 @@ namespace wpf_game_dev_cycle.ViewModel
             SelectCommand = new RelayCommand(ExecuteSelectCommand);
             SqlCommand = new RelayCommand(ExecuteSqlCommand);
 
-            _pageService = pageService;
-            _pageService.PageChanged += (page) => MainPageSource = page;
+            _pageServiceFirstNest = pageServiceFirstNest;
+            _pageServiceFirstNest.PageChanged += (page) => MainPageSource = page;
             
             // _userRepository = new UserRepositoryControl();
             // CurrentUserAccount = new UserAccountModel();

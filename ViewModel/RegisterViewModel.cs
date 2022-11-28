@@ -28,7 +28,7 @@ namespace wpf_game_dev_cycle.ViewModel
         private string _errorMessage;
         private IUserRepository _userRepository;
 
-        private readonly PageService _pageService;
+        private readonly PageServiceFirstNest _pageServiceFirstNest;
         private readonly RegistrationService _regService;
         private readonly WindowNavigationService _navigationService;
 
@@ -122,14 +122,14 @@ namespace wpf_game_dev_cycle.ViewModel
         public ICommand ReturnWindowCommand { get; }
         public ICommand RegisterCommand { get; }
 
-        public RegisterViewModel(RegistrationService regService, WindowNavigationService navigationService, PageService pageService)
+        public RegisterViewModel(RegistrationService regService, WindowNavigationService navigationService, PageServiceFirstNest pageServiceFirstNest)
         {
             _navigationService = navigationService;
             
             _regService = regService;
 
-            _pageService = pageService;
-            _pageService.PageChanged += (page) => PageSource = page;
+            _pageServiceFirstNest = pageServiceFirstNest;
+            _pageServiceFirstNest.PageChanged += (page) => PageSource = page;
 
             _userRepository = new UserRepositoryControl();
 
@@ -145,7 +145,7 @@ namespace wpf_game_dev_cycle.ViewModel
                 Thread.CurrentPrincipal = new GenericPrincipal(
                     new GenericIdentity(Username), null);
                 
-                _pageService.ChangePage(new EmailVerificationPage());
+                _pageServiceFirstNest.ChangePage(new EmailVerificationPage());
                 _regService.Register();
             }
             else

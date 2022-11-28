@@ -8,7 +8,7 @@ namespace wpf_game_dev_cycle.ViewModel
 {
     public class FilterViewModel : ObservableObject
     {
-        private NewPageService _pageService;
+        private PageServiceSecondNest _pageServiceSecondNest;
         public ObservableCollection<FilterModel> FilterItems { get; set; }
 
         private FilterModel _selectedFilterItem;
@@ -23,15 +23,15 @@ namespace wpf_game_dev_cycle.ViewModel
                 _selectedFilterItem = value;
                 OnPropertyChanged();
                 if (_selectedFilterItem != null)
-                    _pageService.ChangePage(_selectedFilterItem.TargetPage);
+                    _pageServiceSecondNest.ChangePage(_selectedFilterItem.TargetPage);
             }
         }
 
-        public FilterViewModel(NewPageService pageService)
+        public FilterViewModel(PageServiceSecondNest pageServiceSecondNest)
         {
             CreateFilterItems();
-            _pageService = pageService;
-            _pageService.PageChanged += (page) => PageSource = page;
+            _pageServiceSecondNest = pageServiceSecondNest;
+            _pageServiceSecondNest.PageChanged += (page) => PageSource = page;
         }
 
         public void CreateFilterItems()

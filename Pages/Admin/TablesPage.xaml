@@ -6,30 +6,46 @@
       xmlns:local="clr-namespace:wpf_game_dev_cycle.Pages.Admin"
       DataContext="{Binding Path=AdminViewModel, Source={StaticResource ViewModelLocator}}"
       mc:Ignorable="d"
+      Background="LightBlue"
       Height="570" Width="800"
       Title="TablesPage">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
         
-        <StackPanel>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="200"/>
+        </Grid.ColumnDefinitions>
+        
+        <Border Grid.Row="0"
+                Grid.Column="0">
+            <DataGrid AutoGenerateColumns="True"
+                      HorizontalAlignment="Left"
+                      VerticalAlignment="Top"
+                      Width="600"
+                      Height="450"
+                      ItemsSource="{Binding SelectedTableToList}"
+                      SelectedItem="{Binding SelectedTableItem}"/>
+        </Border>
+        
+        <Border Grid.Row="0"
+                Grid.Column="1">
             <ComboBox HorizontalAlignment="Right"
                       VerticalAlignment="Top"
-                      Width="180"
-                      Height="30"
+                      Width="200"
+                      Height="25"
                       ItemsSource="{Binding TableItems}"
                       SelectedItem="{Binding SelectedTable}"
                       DisplayMemberPath="Name"
                       SelectedIndex="0"/>
-            <DataGrid x:Name="bb" 
-                      AutoGenerateColumns="True"
-                      HorizontalAlignment="Left"
-                      Width="600"
-                      Height="250"
-                      ItemsSource="{Binding SelectedTableToList}"
-                      SelectedItem="{Binding SelectedTableItem}"/>
+        </Border>
+        
+        <Border Grid.Row="1"
+                Grid.ColumnSpan="2"
+                HorizontalAlignment="Center">
             <StackPanel HorizontalAlignment="Center"  Grid.Row="1" Orientation="Horizontal">
                 <Button Content="Update database"
                         Command="{Binding UpdateCommand}"/>
@@ -42,8 +58,7 @@
                          Width="100"/>
                 <Button Content="Select"
                         Command="{Binding SelectCommand}"/>
-                <Button Content="Restart app"/>
             </StackPanel>
-        </StackPanel>
+        </Border>
     </Grid>
 </Page>

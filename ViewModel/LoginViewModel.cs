@@ -25,7 +25,7 @@ namespace wpf_game_dev_cycle.ViewModel
 
         private readonly LoginService _loginService;
         private readonly WindowNavigationService _navigationService;
-        private readonly PageService _pageService;
+        private readonly PageServiceFirstNest _pageServiceFirstNest;
         
         private readonly ILogger<RelayCommand> _logger;
 
@@ -70,9 +70,9 @@ namespace wpf_game_dev_cycle.ViewModel
         public ICommand RememberPasswordCommand { get; }
         
         public LoginViewModel(LoginService loginService, WindowNavigationService navigationService,
-            PageService pageService)
+            PageServiceFirstNest pageServiceFirstNest)
         {
-            _pageService = pageService;
+            _pageServiceFirstNest = pageServiceFirstNest;
             
             _loginService = loginService;
 

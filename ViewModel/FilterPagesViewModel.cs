@@ -14,7 +14,7 @@ namespace wpf_game_dev_cycle.ViewModel
         private IEnumerable _authTableInfo;
         private IEnumerable _regDateTable;
             
-        private NewPageService _pageService;
+        private PageServiceSecondNest _pageServiceSecondNest;
         private Page _pageSource;
 
         public Page PageSource
@@ -46,7 +46,7 @@ namespace wpf_game_dev_cycle.ViewModel
             }
         }
         
-        public FilterPagesViewModel(NewPageService pageService)
+        public FilterPagesViewModel(PageServiceSecondNest pageServiceSecondNest)
         {
             _database = new CompanyContext();
             
@@ -56,8 +56,8 @@ namespace wpf_game_dev_cycle.ViewModel
             var filter2 = InitRegFilter();
             RegDateTable = filter2;
 
-            _pageService = pageService;
-            _pageService.PageChanged += (page) => PageSource = page;
+            _pageServiceSecondNest = pageServiceSecondNest;
+            _pageServiceSecondNest.PageChanged += (page) => PageSource = page;
         }
 
         private IEnumerable InitAuthFilter()

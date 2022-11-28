@@ -23,23 +23,23 @@ namespace wpf_game_dev_cycle.ViewModel
 
                 if (_selectedMenuItem != null)
                 {
-                    _pageService.ChangePage(_selectedMenuItem.TargetPage);
+                    _pageServiceFirstNest.ChangePage(_selectedMenuItem.TargetPage);
                 }
             }
         }
 
-        private readonly PageService _pageService;
+        private readonly PageServiceFirstNest _pageServiceFirstNest;
 
         public Page PageSource { get; set; }
 
-        public MenuViewModel(PageService pageService)
+        public MenuViewModel(PageServiceFirstNest pageServiceFirstNest)
         {
             CreateMenuItems();
 
-            _pageService = pageService;
+            _pageServiceFirstNest = pageServiceFirstNest;
 
-            _pageService.PageChanged += (page) => PageSource = page;
-            _pageService.ChangePage(new HomePage());
+            _pageServiceFirstNest.PageChanged += (page) => PageSource = page;
+            _pageServiceFirstNest.ChangePage(new HomePage());
         }
 
         public void CreateMenuItems()

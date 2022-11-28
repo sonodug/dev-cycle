@@ -20,8 +20,8 @@ namespace wpf_game_dev_cycle
             services.AddTransient<FilterPagesViewModel>();
             services.AddTransient<FilterViewModel>();
             
-            services.AddSingleton<PageService>();
-            services.AddSingleton<NewPageService>();
+            services.AddSingleton<PageServiceFirstNest>();
+            services.AddSingleton<PageServiceSecondNest>();
             services.AddSingleton<WindowNavigationService>();
             services.AddSingleton<LoginService>();
             services.AddSingleton<RegistrationService>();
