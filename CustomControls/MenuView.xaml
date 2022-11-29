@@ -17,10 +17,12 @@
 
         <ListView ItemsSource="{Binding MenuItems}"
                   SelectedItem="{Binding SelectedMenuItem}"
+                  SelectedIndex="0"
                   Background="Transparent"
                   BorderThickness="0"
                   ItemContainerStyle="{StaticResource MenuItemStyle}"
                   VerticalAlignment="Top"
+                  HorizontalAlignment="Center"
                   Margin="0,10,0,0">
 
         </ListView>

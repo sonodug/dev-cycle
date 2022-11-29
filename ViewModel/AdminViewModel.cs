@@ -147,7 +147,7 @@ namespace wpf_game_dev_cycle.ViewModel
             {
                 switch (SelectedTable.Name)
                 {
-                    case "Admin_account":
+                    case "Admin_accounts":
                     {
                         AdministratorAccount account = SelectedTableItem as AdministratorAccount;
                         if (account != null)
@@ -158,18 +158,7 @@ namespace wpf_game_dev_cycle.ViewModel
                         _database.SaveChanges();
                         break;
                     }
-                    case "Employees":
-                    {
-                        Employee employee = SelectedTableItem as Employee;
-                        if (employee != null)
-                        {
-                            _database.Employees.Remove(employee);
-                        }
-            
-                        _database.SaveChanges();
-                        break;
-                    }
-                    case "Publisher":
+                    case "Publishers":
                     {
                         Publisher publisher = SelectedTableItem as Publisher;
                         if (publisher != null)
@@ -180,12 +169,100 @@ namespace wpf_game_dev_cycle.ViewModel
                         _database.SaveChanges();
                         break;
                     }
-                    case "Publisher_account":
+                    case "Publisher_accounts":
                     {
-                        PublisherAccount account = SelectedTableItem as PublisherAccount;
+                        PublisherAccount publisherAccount = SelectedTableItem as PublisherAccount;
+                        if (publisherAccount != null)
+                        {
+                            _database.PublisherAccounts.Remove(publisherAccount);
+                        }
+            
+                        _database.SaveChanges();
+                        break;
+                    }
+                    case "Verifications":
+                    {
+                        Verification verification = SelectedTableItem as Verification;
+                        if (verification != null)
+                        {
+                            _database.Verifications.Remove(verification);
+                        }
+            
+                        _database.SaveChanges();
+                        break;
+                    }
+                    case "Developers":
+                    {
+                        Developer developer = SelectedTableItem as Developer;
+                        if (developer != null)
+                        {
+                            _database.Developers.Remove(developer);
+                        }
+            
+                        _database.SaveChanges();
+                        break;
+                    }
+                    case "Developer_accounts":
+                    {
+                        DeveloperAccount account = SelectedTableItem as DeveloperAccount;
                         if (account != null)
                         {
-                            _database.PublisherAccounts.Remove(account);
+                            _database.DeveloperAccounts.Remove(account);
+                        }
+            
+                        _database.SaveChanges();
+                        break;
+                    }
+                    case "Customers":
+                    {
+                        Customer customer = SelectedTableItem as Customer;
+                        if (customer != null)
+                        {
+                            _database.Customers.Remove(customer);
+                        }
+            
+                        _database.SaveChanges();
+                        break;
+                    }
+                    case "Contracts":
+                    {
+                        Contract contract = SelectedTableItem as Contract;
+                        if (contract != null)
+                        {
+                            _database.Contracts.Remove(contract);
+                        }
+            
+                        _database.SaveChanges();
+                        break;
+                    }
+                    case "Projects":
+                    {
+                        Project project = SelectedTableItem as Project;
+                        if (project != null)
+                        {
+                            _database.Projects.Remove(project);
+                        }
+            
+                        _database.SaveChanges();
+                        break;
+                    }
+                    case "Repositories":
+                    {
+                        Repository repository = SelectedTableItem as Repository;
+                        if (repository != null)
+                        {
+                            _database.Repositories.Remove(repository);
+                        }
+            
+                        _database.SaveChanges();
+                        break;
+                    }
+                    case "Development_teams":
+                    {
+                        DevelopmentTeam developmentTeam = SelectedTableItem as DevelopmentTeam;
+                        if (developmentTeam != null)
+                        {
+                            _database.DevelopmentTeams.Remove(developmentTeam);
                         }
             
                         _database.SaveChanges();
@@ -215,32 +292,82 @@ namespace wpf_game_dev_cycle.ViewModel
         {
             using (var context = new CompanyContext())
             {
-                if (SelectedTable.Name == "Admin_account")
+                if (SelectedTable.Name == "Admin_accounts")
+                {
+                    var accounts = _database.AdministratorAccounts.Where(p=> p.Login == SelectedComparisons);
+                    SelectedTableToList = accounts.ToList();
+                }
+                else if (SelectedTable.Name == "Publishers")
+                {
+                    var publishers = _database.Publishers.Where(p=> p.Full_name == SelectedComparisons);
+                    SelectedTableToList = publishers.ToList();
+                }
+                else if (SelectedTable.Name == "Publisher_accounts")
+                {
+                    var accounts = _database.PublisherAccounts.Where(p=> p.Login == SelectedComparisons);
+                    SelectedTableToList = accounts.ToList();
+                }
+                else if (SelectedTable.Name == "Verifications")
+                {
+                    var verifications = _database.Verifications.Where(p=> p.Employee_full_name == SelectedComparisons);
+                    SelectedTableToList = verifications.ToList();
+                }
+                else if (SelectedTable.Name == "Developers")
+                {
+                    var developers = _database.Developers.Where(p=> p.Full_name == SelectedComparisons);
+                    SelectedTableToList = developers.ToList();
+                }
+                else if (SelectedTable.Name == "Developer_accounts")
+                {
+                    var developerAccounts = _database.DeveloperAccounts.Where(p=> p.Login == SelectedComparisons);
+                    SelectedTableToList = developerAccounts.ToList();
+                }
+                else if (SelectedTable.Name == "Customers")
                 {
                     if (int.TryParse(SelectedComparisons, out var id))
                     {
-                        var accounts = _database.AdministratorAccounts.Where(p=> p.Account_id == id);
-                        SelectedTableToList = accounts.ToList();
+                        var customers = _database.Customers.Where(p=> p.Customer_id == id);
+                        SelectedTableToList = customers.ToList();
                     }
                     else
                         return;
                 }
-                else if (SelectedTable.Name == "Employees")
-                {
-                    var accounts = _database.Employees.Where(p=> p.Employee_code == SelectedComparisons);
-                    SelectedTableToList = accounts.ToList();
-                }
-                else if (SelectedTable.Name == "Publisher")
-                {
-                    var accounts = _database.Publishers.Where(p=> p.Employee_code == SelectedComparisons);
-                    SelectedTableToList = accounts.ToList();
-                }
-                else if (SelectedTable.Name == "Publisher_account")
+                else if (SelectedTable.Name == "Contracts")
                 {
                     if (int.TryParse(SelectedComparisons, out var id))
                     {
-                        var accounts = _database.PublisherAccounts.Where(p=> p.Account_id == id);
-                        SelectedTableToList = accounts.ToList();
+                        var contracts = _database.Contracts.Where(p=> p.Contract_id == id);
+                        SelectedTableToList = contracts.ToList();
+                    }
+                    else
+                        return;
+                }
+                else if (SelectedTable.Name == "Projects")
+                {
+                    if (int.TryParse(SelectedComparisons, out var id))
+                    {
+                        var projects = _database.Projects.Where(p=> p.Project_id == id);
+                        SelectedTableToList = projects.ToList();
+                    }
+                    else
+                        return;
+                }
+                else if (SelectedTable.Name == "Repositories")
+                {
+                    if (int.TryParse(SelectedComparisons, out var id))
+                    {
+                        var repositories = _database.Repositories.Where(p=> p.Repository_id == id);
+                        SelectedTableToList = repositories.ToList();
+                    }
+                    else
+                        return;
+                }
+                else if (SelectedTable.Name == "Development_teams")
+                {
+                    if (int.TryParse(SelectedComparisons, out var id))
+                    {
+                        var developmentTeams = _database.DevelopmentTeams.Where(p=> p.Team_member_id == id);
+                        SelectedTableToList = developmentTeams.ToList();
                     }
                     else
                         return;
@@ -284,19 +411,47 @@ namespace wpf_game_dev_cycle.ViewModel
             {
                 new Table
                 {
-                    Name = "Admin_account"
+                    Name = "Admin_accounts"
                 },
                 new Table
                 {
-                    Name = "Employees"
+                    Name = "Publishers"
                 },
                 new Table
                 {
-                    Name = "Publisher"
+                    Name = "Publisher_accounts"
                 },
                 new Table
                 {
-                    Name = "Publisher_account"
+                    Name = "Verifications"
+                },
+                new Table
+                {
+                    Name = "Developers"
+                },
+                new Table
+                {
+                    Name = "Developer_accounts"
+                },
+                new Table
+                {
+                    Name = "Customers"
+                },
+                new Table
+                {
+                    Name = "Contracts"
+                },
+                new Table
+                {
+                    Name = "Projects"
+                },
+                new Table
+                {
+                    Name = "Repositories"
+                },
+                new Table
+                {
+                    Name = "Development_teams"
                 }
             };
         }
@@ -304,32 +459,75 @@ namespace wpf_game_dev_cycle.ViewModel
         private void InitializeSets()
         {
             _database.AdministratorAccounts.Load();
-            _database.Employees.Load();
             _database.Publishers.Load();
             _database.PublisherAccounts.Load();
+            _database.Verifications.Load();
+            _database.Developers.Load();
+            _database.DeveloperAccounts.Load();
+            _database.Customers.Load();
+            _database.Contracts.Load();
+            _database.Projects.Load();
+            _database.Repositories.Load();
+            _database.DevelopmentTeams.Load();
         }
         
         private void UpdateCurrentInterfaceTable(Table? value)
         {
-            if (value.Name == "Admin_account")
+            // possible expansion
+            if (value.Name == "Admin_accounts")
             {
                 SelectedTableToList = _database.AdministratorAccounts.Local.ToBindingList();
-                ExpressionLabel = "Selecting by Account_id";
+                ExpressionLabel = "Selecting by Login";
             }
-            else if (value.Name == "Employees")
-            {
-                SelectedTableToList = _database.Employees.Local.ToBindingList();
-                ExpressionLabel = "Selecting by Employee_code";
-            }
-            else if (value.Name == "Publisher")
+            else if (value.Name == "Publishers")
             {
                 SelectedTableToList = _database.Publishers.Local.ToBindingList();
-                ExpressionLabel = "Selecting by Employee_code";
+                ExpressionLabel = "Selecting by Full_name";
             }
-            else if (value.Name == "Publisher_account")
+            else if (value.Name == "Publisher_accounts")
             {
                 SelectedTableToList = _database.PublisherAccounts.Local.ToBindingList();
-                ExpressionLabel = "Selecting by Account_id";
+                ExpressionLabel = "Selecting by Login";
+            }
+            else if (value.Name == "Verifications")
+            {
+                SelectedTableToList = _database.Verifications.Local.ToBindingList();
+                ExpressionLabel = "Selecting by Employee_full_name";
+            }
+            else if (value.Name == "Developers")
+            {
+                SelectedTableToList = _database.Developers.Local.ToBindingList();
+                ExpressionLabel = "Selecting by Full_name";
+            }
+            else if (value.Name == "Developer_accounts")
+            {
+                SelectedTableToList = _database.DeveloperAccounts.Local.ToBindingList();
+                ExpressionLabel = "Selecting by Login";
+            }
+            else if (value.Name == "Customers")
+            {
+                SelectedTableToList = _database.Customers.Local.ToBindingList();
+                ExpressionLabel = "Selecting by Customer_id";
+            }
+            else if (value.Name == "Contracts")
+            {
+                SelectedTableToList = _database.Contracts.Local.ToBindingList();
+                ExpressionLabel = "Selecting by Contract_id";
+            }
+            else if (value.Name == "Projects")
+            {
+                SelectedTableToList = _database.Projects.Local.ToBindingList();
+                ExpressionLabel = "Selecting by Project_id";
+            }
+            else if (value.Name == "Repositories")
+            {
+                SelectedTableToList = _database.Repositories.Local.ToBindingList();
+                ExpressionLabel = "Selecting by Repository_id";
+            }
+            else if (value.Name == "Development_teams")
+            {
+                SelectedTableToList = _database.DevelopmentTeams.Local.ToBindingList();
+                ExpressionLabel = "Selecting by Team_member_id";
             }
         }
     }

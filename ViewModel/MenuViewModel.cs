@@ -49,21 +49,18 @@ namespace wpf_game_dev_cycle.ViewModel
             MenuItems.Add(new MenuModel
             {
                 MenuName = "Home",
-                MenuColor = "#FF5733",
                 TargetPage = new HomePage()
             });
             
             MenuItems.Add(new MenuModel
             {
                 MenuName = "Table management",
-                MenuColor = "#ae2012",
                 TargetPage = new TablesPage()
             });
 
             MenuItems.Add(new MenuModel
             {
                 MenuName = "Filters",
-                MenuColor = "#00b4d8",
                 TargetPage = new FiltersPage()
             });
         }

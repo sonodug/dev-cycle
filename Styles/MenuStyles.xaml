@@ -16,19 +16,13 @@
                 <ControlTemplate TargetType="ListViewItem">
                     <Border Background="{TemplateBinding Background}"
                             Height="30"
-                            Width="155"
+                            Width="150"
                             CornerRadius="4"
-                            Margin="0,12,12,0"
+                            Margin="0,12,0,0"
                             HorizontalAlignment="Right">
 
                         <StackPanel Orientation="Horizontal"
                                     Margin="10,0,0,0">
-
-                            <Ellipse Width="10" Height="10">
-                                <Ellipse.Fill>
-                                    <SolidColorBrush Color="{Binding MenuColor}"/>
-                                </Ellipse.Fill>
-                            </Ellipse>
 
                             <Label Content="{Binding MenuName}"
                                    Foreground="White"
