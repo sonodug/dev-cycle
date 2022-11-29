@@ -6,8 +6,7 @@
              xmlns:local="clr-namespace:wpf_game_dev_cycle.CustomControls"
              mc:Ignorable="d"
              Background="LightBlue"
-             DataContext="{Binding FilterViewModel, Source={StaticResource ViewModelLocator}}"
-             Height="100" Width="800">
+             DataContext="{Binding FilterViewModel, Source={StaticResource ViewModelLocator}}">
     
     <UserControl.Resources>
         <ResourceDictionary Source="pack://application:,,,/wpf-game-dev-cycle;component/Styles/Styles.xaml"/>

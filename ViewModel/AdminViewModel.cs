@@ -2,8 +2,10 @@ using System;
 using System.Collections;
 using System.Collections.ObjectModel;
 using System.Data.Entity.Validation;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using Microsoft.EntityFrameworkCore;
@@ -30,14 +32,61 @@ namespace wpf_game_dev_cycle.ViewModel
         private Page _mainPageSource;
 
         private PageServiceFirstNest _pageServiceFirstNest;
-        
+
+        private int _frameColumn;
+        private int _frameColumnSpan;
+        private Visibility _menuVisibility;
+        private int _tableWidth;
+
         public ObservableCollection<Table> TableItems { get; set; }
 
         public ICommand UpdateCommand { get; }
         public ICommand DeleteRowCommand { get; }
         public ICommand SelectCommand { get; }
         public ICommand SqlCommand { get; }
+        
+        public ICommand ReloadAppCommand { get; }
+        public ICommand HideMenuCommand { get; }
 
+        public int TableWidth
+        {
+            get => _tableWidth;
+            set
+            {
+                _tableWidth = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public int FrameColumn
+        {
+            get => _frameColumn;
+            set
+            {
+                _frameColumn = value;
+                OnPropertyChanged();
+            }
+        }
+        
+        public int FrameColumnSpan
+        {
+            get => _frameColumnSpan;
+            set
+            {
+                _frameColumnSpan = value;
+                OnPropertyChanged();
+            }
+        }
+        public Visibility MenuVisibility
+        {
+            get => _menuVisibility;
+            set
+            {
+                _menuVisibility = value;
+                OnPropertyChanged();
+            }
+        }
+        
         public Page MainPageSource
         {
             get => _mainPageSource;
@@ -122,6 +171,11 @@ namespace wpf_game_dev_cycle.ViewModel
 
         public AdminViewModel(PageServiceFirstNest pageServiceFirstNest)
         {
+            FrameColumn = 1;
+            FrameColumnSpan = 3;
+            MenuVisibility = Visibility.Visible;
+            TableWidth = 600;
+
             _database = new CompanyContext();
             AddTablesList();
             InitializeSets();
@@ -129,7 +183,9 @@ namespace wpf_game_dev_cycle.ViewModel
             UpdateCommand = new RelayCommand(ExecuteUpdateCommand);
             DeleteRowCommand = new RelayCommand(ExecuteDeleteRowCommand);
             SelectCommand = new RelayCommand(ExecuteSelectCommand);
-            SqlCommand = new RelayCommand(ExecuteSqlCommand);
+            SqlCommand = new RelayCommand(ExecuteSqlCommand);;
+            ReloadAppCommand = new RelayCommand(ExecuteReloadAppCommand);;
+            HideMenuCommand = new RelayCommand(ExecuteHideMenuCommand);;
 
             _pageServiceFirstNest = pageServiceFirstNest;
             _pageServiceFirstNest.PageChanged += (page) => MainPageSource = page;
@@ -285,6 +341,30 @@ namespace wpf_game_dev_cycle.ViewModel
             catch (DbEntityValidationException e)
             {
                 
+            }
+        }
+
+        private void ExecuteReloadAppCommand(object obj)
+        {
+            Process.Start(Application.ResourceAssembly.Location);
+            Application.Current.Shutdown();
+        }
+        
+        private void ExecuteHideMenuCommand(object obj)
+        {
+            if (MenuVisibility == Visibility.Visible)
+            {
+                FrameColumn = 0;
+                FrameColumnSpan = 4;
+                MenuVisibility = Visibility.Hidden;
+                TableWidth = 1000;
+            }
+            else
+            {
+                FrameColumn = 1;
+                FrameColumnSpan = 3;
+                MenuVisibility = Visibility.Visible;
+                TableWidth = 600;
             }
         }
 

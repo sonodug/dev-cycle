@@ -7,7 +7,6 @@
       DataContext="{Binding Path=AdminViewModel, Source={StaticResource ViewModelLocator}}"
       mc:Ignorable="d"
       Background="LightBlue"
-      Height="570" Width="800"
       Title="TablesPage">
     <Grid>
         <Grid.RowDefinitions>
@@ -25,8 +24,8 @@
             <DataGrid AutoGenerateColumns="True"
                       HorizontalAlignment="Left"
                       VerticalAlignment="Top"
-                      Width="600"
-                      Height="450"
+                      Width="1200"
+                      Height="700"
                       ItemsSource="{Binding SelectedTableToList}"
                       SelectedItem="{Binding SelectedTableItem}"/>
         </Border>

@@ -45,17 +45,26 @@
                 
                 <Border Grid.Row="0"
                         Grid.ColumnSpan="1" Grid.Column="0">
-                        <TextBlock Text="Administrator"
-                                   Foreground="DarkGray"
-                                   FontSize="14"
-                                   FontFamily="Montserrat"
-                                   VerticalAlignment="Center"
-                                   Margin="10,5,0,0"/>
+                        <StackPanel HorizontalAlignment="Left"
+                                    Orientation="Horizontal">
+                                <TextBlock Text="Administrator"
+                                           Foreground="DarkGray"
+                                           FontSize="14"
+                                           FontFamily="Montserrat"
+                                           VerticalAlignment="Center"
+                                           Margin="10,8,75,0"/>
+                                <Button Content="☰"
+                                        Command="{Binding HideMenuCommand}"
+                                        Style="{StaticResource WindowConfigureButton_Style}"/>
+                        </StackPanel>
                 </Border>
                 
                 <Border Grid.Column="3">
                         <StackPanel HorizontalAlignment="Right"
                                     Orientation="Horizontal">
+                                <Button Content="🗘"
+                                        Command="{Binding ReloadAppCommand}"
+                                        Style="{StaticResource WindowConfigureButton_Style}"/>
                                 <Button Content="-"
                                         Padding="0,0,0,12"
                                         Click="ButtonMinimize_Click"
@@ -74,14 +83,13 @@
                 <Grid Grid.Row="2"
                       Grid.Column="0"
                       Background="#212529"
-                      Visibility="Visible">
-                        
+                      Visibility="{Binding MenuVisibility}">
                         <uc:MenuView/>
                 </Grid>
                 
                 <Frame Grid.Row="2"
-                       Grid.Column="1"
-                       Grid.ColumnSpan="3"
+                       Grid.Column="{Binding FrameColumn}"
+                       Grid.ColumnSpan="{Binding FrameColumnSpan}"
                        Content="{Binding MainPageSource}"
                        NavigationUIVisibility="Hidden"/>
         </Grid>
