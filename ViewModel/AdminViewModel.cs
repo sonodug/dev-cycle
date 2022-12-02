@@ -36,7 +36,6 @@ namespace wpf_game_dev_cycle.ViewModel
         private int _frameColumn;
         private int _frameColumnSpan;
         private Visibility _menuVisibility;
-        private int _tableWidth;
 
         public ObservableCollection<Table> TableItems { get; set; }
 
@@ -47,16 +46,6 @@ namespace wpf_game_dev_cycle.ViewModel
         
         public ICommand ReloadAppCommand { get; }
         public ICommand HideMenuCommand { get; }
-
-        public int TableWidth
-        {
-            get => _tableWidth;
-            set
-            {
-                _tableWidth = value;
-                OnPropertyChanged();
-            }
-        }
 
         public int FrameColumn
         {
@@ -174,7 +163,6 @@ namespace wpf_game_dev_cycle.ViewModel
             FrameColumn = 1;
             FrameColumnSpan = 3;
             MenuVisibility = Visibility.Visible;
-            TableWidth = 600;
 
             _database = new CompanyContext();
             AddTablesList();
@@ -357,14 +345,12 @@ namespace wpf_game_dev_cycle.ViewModel
                 FrameColumn = 0;
                 FrameColumnSpan = 4;
                 MenuVisibility = Visibility.Hidden;
-                TableWidth = 1000;
             }
             else
             {
                 FrameColumn = 1;
                 FrameColumnSpan = 3;
                 MenuVisibility = Visibility.Visible;
-                TableWidth = 600;
             }
         }
 

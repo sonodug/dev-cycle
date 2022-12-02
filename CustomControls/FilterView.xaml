@@ -13,12 +13,13 @@
     </UserControl.Resources>
     
     <Grid>
-        <ListView ItemsSource="{Binding FilterItems}"
+        <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
+                  ItemsSource="{Binding FilterItems}"
                   SelectedItem="{Binding SelectedFilterItem}"
                   Background="Transparent"
                   BorderThickness="0"
                   ItemContainerStyle="{StaticResource FilterItemStyle}"
-                  VerticalAlignment="Center"
+                  VerticalAlignment="Top"
                   Margin="0,10,0,0"
                   Cursor="Hand">
             <ListView.ItemsPanel>

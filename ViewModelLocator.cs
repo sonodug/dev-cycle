@@ -25,6 +25,7 @@ namespace wpf_game_dev_cycle
             services.AddSingleton<WindowNavigationService>();
             services.AddSingleton<LoginService>();
             services.AddSingleton<RegistrationService>();
+            services.AddSingleton<UpdateTableService>();
 
             _provider = services.BuildServiceProvider();
 

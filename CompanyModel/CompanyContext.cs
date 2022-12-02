@@ -136,8 +136,8 @@ namespace wpf_game_dev_cycle.Model
     {
         [Key, Column(Order = 0)] public int Team_member_id { get; set; }
         [Key, Column(Order = 1)] public string Employee_code { get; set; }
-        [Key, Column(Order = 2)] public int Repository_id { get; set; }
-        [Key, Column(Order = 3)] public string? Position = "Null";
-        [Key, Column(Order = 4)] public string? Work_status = "Null";
+        public int Repository_id { get; set; }
+        [Key, Column(Order = 3)] public string? Position { get; set; }
+        [Key, Column(Order = 4)] public string? Work_status { get; set; }
     }
 }

@@ -15,6 +15,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="100"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
         
         <Border Grid.Row="0">
@@ -24,5 +25,7 @@
         <Frame Grid.Row="1" Content="{Binding PageSource}"
                NavigationUIVisibility="Hidden"
                HorizontalAlignment="Center"/>
+        <Button Grid.Row="2" Content="Update filters"
+                Command="{Binding UpdateFiltersCommand}"/>
     </Grid>
 </Page>

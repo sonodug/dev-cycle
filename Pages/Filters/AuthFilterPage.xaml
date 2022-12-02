@@ -7,13 +7,11 @@
       mc:Ignorable="d"
       DataContext="{Binding FilterPagesViewModel, Source={StaticResource ViewModelLocator}}"
       Background="Beige"
-      Title="AuthFilterPage" Height="470" Width="800">
+      Title="AuthFilterPage">
     <Grid>
         <DataGrid VerticalAlignment="Top"
                   AutoGenerateColumns="True"
                   HorizontalAlignment="Left"
-                  Width="800"
-                  Height="470"
                   ItemsSource="{Binding AuthTableInfo}"/>
     </Grid>
 </Page>
