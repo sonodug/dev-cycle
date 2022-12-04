@@ -87,19 +87,19 @@ namespace wpf_game_dev_cycle.Model
     public class DeveloperAccount : Entity
     {
         [Key, Column(Order = 0)] public Guid Account_id { get; set; }
-        [Key, Column(Order = 1)] public string Login { get; set; }
-        [Key, Column(Order = 2)] public string Password { get; set; }
-        [Key, Column(Order = 3)] public string Email { get; set; }
-        [Key, Column(Order = 4)] public string? Phone_number = "Null";
-        [Key, Column(Order = 5)] public string Verification_code { get; set; }
+        public string Login { get; set; }
+        public string Password { get; set; }
+        public string Email { get; set; }
+        public string? Phone_number = "Null";
+        public string Verification_code { get; set; }
         [Key, Column(Order = 6)] public string Employee_code { get; set; }
     }
     
     [Table("customers", Schema = "dev_cycle_company")]
     public class Customer : Entity
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)] public int Customer_id { get; set; }
-        public string Order_name { get; set; }
+        [Key, Column(Order = 0)] public int Customer_id { get; set; }
+        [Key, Column(Order = 1)] public string Order_name { get; set; }
     }
     
     [Table("contracts", Schema = "dev_cycle_company")]
@@ -114,21 +114,21 @@ namespace wpf_game_dev_cycle.Model
     [Table("projects", Schema = "dev_cycle_company")]
     public class Project : Entity
     {
-        [Key] public int Project_id { get; set; }
-        public int Customer_id { get; set; }
-        public string Name { get; set; }
-        public string Status { get; set; }
-        public DateTime Deadline_date { get; set; }
-        public int Contract_id { get; set; }
+        [Key, Column(Order = 0)] public int Project_id { get; set; }
+        [Key, Column(Order = 1)] public int Customer_id { get; set; }
+        [Key, Column(Order = 2)] public string Name { get; set; }
+        [Key, Column(Order = 3)] public string Status { get; set; }
+        [Key, Column(Order = 4)] public DateTime Deadline_date { get; set; }
+        [Key, Column(Order = 5)] public int Contract_id { get; set; }
     }
     
     [Table("repositories", Schema = "dev_cycle_company")]
     public class Repository : Entity
     {
-        [Key] public int Repository_id { get; set; }
-        public string Repository_name { get; set; }
-        public DateTime Creation_date { get; set; }
-        public int Project_id { get; set; }
+        [Key, Column(Order = 0)] public int Repository_id { get; set; }
+        [Key, Column(Order = 1)] public string Repository_name { get; set; }
+        [Key, Column(Order = 2)] public DateTime Creation_date { get; set; }
+        [Key, Column(Order = 3)] public int Project_id { get; set; }
     }
     
     [Table("development_teams", Schema = "dev_cycle_company")]

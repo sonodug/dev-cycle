@@ -74,12 +74,24 @@ namespace wpf_game_dev_cycle.ViewModel
 
         private void UpdateTables()
         {
-            FilterItems[0].TargetPage = new AuthFilterPage();
-            FilterItems[1].TargetPage = new RegDateFilterPage();
-            FilterItems[2].TargetPage = new ContractPriceFilterPage();
-            FilterItems[3].TargetPage = new ContractPriceFilterPage();
-            _pageServiceSecondNest.ChangePage(new WorkStatusFilterPage());
-            //page matching
+            if (SelectedFilterItem != null)
+            {
+                switch (SelectedFilterItem.FilterName)
+                {
+                    case "Authentication parameters filter":
+                        _pageServiceSecondNest.ChangePage(new AuthFilterPage());
+                        break;
+                    case "Registration date filter":
+                        _pageServiceSecondNest.ChangePage(new RegDateFilterPage());
+                        break;
+                    case "Contract price filter":
+                        _pageServiceSecondNest.ChangePage(new ContractPriceFilterPage());
+                        break;
+                    case "Work status filter":
+                        _pageServiceSecondNest.ChangePage(new WorkStatusFilterPage());
+                        break;
+                }
+            }
         }
     }    
 }

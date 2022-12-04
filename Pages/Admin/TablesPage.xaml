@@ -6,13 +6,14 @@
       xmlns:local="clr-namespace:wpf_game_dev_cycle.Pages.Admin"
       DataContext="{Binding Path=AdminViewModel, Source={StaticResource ViewModelLocator}}"
       mc:Ignorable="d"
-      Background="LightBlue"
+      Background="#23262E"
       Title="TablesPage">
     
     <Page.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Styles/Styles.xaml"/>
+                <ResourceDictionary Source="/Styles/ButtonStyles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Page.Resources>
@@ -20,7 +21,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="120"/>
+            <RowDefinition Height="100"/>
         </Grid.RowDefinitions>
         
         <Grid.ColumnDefinitions>
@@ -56,17 +57,36 @@
                 VerticalAlignment="Center">
             <StackPanel HorizontalAlignment="Center"  Grid.Row="1" Orientation="Horizontal"
                         Margin="0,0,0,0">
-                <Button Content="Update database"
-                        Command="{Binding UpdateCommand}"/>
+                <Button Content="Save changes"
+                        Command="{Binding UpdateCommand}"
+                        Width="140"
+                        Style="{StaticResource DatabaseConfigureButton_Style}"/>
                 <Button Content="Delete"
-                        Command="{Binding DeleteRowCommand}"/>
+                        Command="{Binding DeleteRowCommand}"
+                        Style="{StaticResource DatabaseConfigureButton_Style}"
+                        Margin="0,0,5,0"/>
                 <TextBlock Text="{Binding ExpressionLabel}"
                            VerticalAlignment="Center"
-                           FontSize="15"/>
+                           FontFamily="Montserrat"
+                           FontWeight="Bold"
+                           FontSize="15"
+                           Margin="0,0,5,0"
+                           Foreground="White"/>
                 <TextBox Text="{Binding SelectedComparisons}"
-                         Width="100"/>
+                         Width="100"
+                         Height="30"
+                         FontFamily="Montserrat"
+                         FontWeight="Medium"
+                         VerticalContentAlignment="Center"
+                         HorizontalAlignment="Center"
+                         Margin="0,0,5,0"/>
                 <Button Content="Select"
-                        Command="{Binding SelectCommand}"/>
+                        Command="{Binding SelectCommand}"
+                        Style="{StaticResource DatabaseConfigureButton_Style}"/>
+                <Button Content="←"
+                        Command="{Binding ReturnSelectCommand}"
+                        FontSize="24"
+                        Style="{StaticResource DatabaseConfigureButton_Style}"/>
             </StackPanel>
         </Border>
     </Grid>

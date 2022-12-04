@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:wpf_game_dev_cycle.CustomControls"
              mc:Ignorable="d"
-             Background="LightBlue"
+             Background="#23262E"
              DataContext="{Binding FilterViewModel, Source={StaticResource ViewModelLocator}}">
     
     <UserControl.Resources>

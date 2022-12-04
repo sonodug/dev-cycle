@@ -7,25 +7,30 @@
       xmlns:uc="clr-namespace:wpf_game_dev_cycle.CustomControls"
       xmlns:pg="clr-namespace:wpf_game_dev_cycle.Pages.Filters"
       mc:Ignorable="d"
-      Background="LightBlue"
+      Background="#23262E"
       DataContext="{Binding FilterPagesViewModel, Source={StaticResource ViewModelLocator}}"
       Title="FiltersPage">
     
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="100"/>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="1"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="20"/>
+            <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
+        
+        <Border Grid.Row="1"
+                Background="White"/>
         
         <Border Grid.Row="0">
             <uc:FilterView/>
         </Border>
         
-        <Frame Grid.Row="1" Content="{Binding PageSource}"
+        <Frame Grid.Row="2" Content="{Binding PageSource}"
                NavigationUIVisibility="Hidden"
-               HorizontalAlignment="Center"/>
-        <Button Grid.Row="2" Content="Update filters"
+               HorizontalAlignment="Center"
+               Margin="0,5,0,0"/>
+        <Button Grid.Row="3" Content="Update filters"
                 Command="{Binding UpdateFiltersCommand}"/>
     </Grid>
 </Page>

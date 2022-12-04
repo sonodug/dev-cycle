@@ -42,6 +42,7 @@ namespace wpf_game_dev_cycle.ViewModel
         public ICommand UpdateCommand { get; }
         public ICommand DeleteRowCommand { get; }
         public ICommand SelectCommand { get; }
+        public ICommand ReturnSelectCommand { get; }
         public ICommand SqlCommand { get; }
         
         public ICommand ReloadAppCommand { get; }
@@ -171,6 +172,7 @@ namespace wpf_game_dev_cycle.ViewModel
             UpdateCommand = new RelayCommand(ExecuteUpdateCommand);
             DeleteRowCommand = new RelayCommand(ExecuteDeleteRowCommand);
             SelectCommand = new RelayCommand(ExecuteSelectCommand);
+            ReturnSelectCommand = new RelayCommand(ExecuteReturnSelectCommand);
             SqlCommand = new RelayCommand(ExecuteSqlCommand);;
             ReloadAppCommand = new RelayCommand(ExecuteReloadAppCommand);;
             HideMenuCommand = new RelayCommand(ExecuteHideMenuCommand);;
@@ -453,6 +455,18 @@ namespace wpf_game_dev_cycle.ViewModel
             catch (Exception e)
             {
                 // mb??
+            }
+        }
+        
+        private void ExecuteReturnSelectCommand(object obj)
+        {
+            try
+            {
+                UpdateCurrentInterfaceTable(SelectedTable);
+            }
+            catch (Exception e)
+            {
+                
             }
         }
 
