@@ -65,7 +65,7 @@
                     <Border Background="{TemplateBinding Background}"
                             BorderBrush="Black"
                             BorderThickness="0.2"
-                            CornerRadius="8"
+                            CornerRadius="1"
                             Padding="{TemplateBinding Padding}">
                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Border>

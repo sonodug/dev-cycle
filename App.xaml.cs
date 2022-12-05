@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using Microsoft.Extensions.Logging;
 using Serilog;
 using wpf_game_dev_cycle.View;

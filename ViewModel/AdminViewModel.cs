@@ -336,7 +336,8 @@ namespace wpf_game_dev_cycle.ViewModel
 
         private void ExecuteReloadAppCommand(object obj)
         {
-            Process.Start(Application.ResourceAssembly.Location);
+            var currentExecutablePath = Process.GetCurrentProcess().MainModule?.FileName;
+            if (currentExecutablePath != null) Process.Start(currentExecutablePath);
             Application.Current.Shutdown();
         }
         

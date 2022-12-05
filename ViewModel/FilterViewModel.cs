@@ -62,13 +62,18 @@ namespace wpf_game_dev_cycle.ViewModel
             });
             FilterItems.Add(new FilterModel
             {
-                FilterName = "Dev team filter",
-                TargetPage = new ContractPriceFilterPage()
+                FilterName = "Project status filter",
+                TargetPage = new ProjectStatusFilterPage()
             });
             FilterItems.Add(new FilterModel
             {
                 FilterName = "Work status filter",
                 TargetPage = new WorkStatusFilterPage()
+            });
+            FilterItems.Add(new FilterModel
+            {
+                FilterName = "Verifications filter",
+                TargetPage = new VerificationFilterPage()
             });
         }
 
@@ -89,6 +94,12 @@ namespace wpf_game_dev_cycle.ViewModel
                         break;
                     case "Work status filter":
                         _pageServiceSecondNest.ChangePage(new WorkStatusFilterPage());
+                        break;
+                    case "Project status filter":
+                        _pageServiceSecondNest.ChangePage(new ProjectStatusFilterPage());
+                        break;
+                    case "Verifications filter":
+                        _pageServiceSecondNest.ChangePage(new VerificationFilterPage());
                         break;
                 }
             }

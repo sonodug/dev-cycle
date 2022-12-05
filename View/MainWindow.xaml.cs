@@ -17,12 +17,5 @@ namespace wpf_game_dev_cycle
             InitializeComponent();
             
         }
-
-        // private void returnSelectByIdButton_Click(object sender, RoutedEventArgs e)
-        // {
-        //     var ad_accounts = db.AdministratorAccounts;
-        //     accounts.ItemsSource = ad_accounts.ToList();
-        // }
-        //
     }
 }

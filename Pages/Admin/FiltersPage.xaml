@@ -11,6 +11,14 @@
       DataContext="{Binding FilterPagesViewModel, Source={StaticResource ViewModelLocator}}"
       Title="FiltersPage">
     
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Styles/ButtonStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Page.Resources>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="80"/>
@@ -31,6 +39,9 @@
                HorizontalAlignment="Center"
                Margin="0,5,0,0"/>
         <Button Grid.Row="3" Content="Update filters"
+                Style="{StaticResource DatabaseConfigureButton_Style}"
+                Width="250"
+                HorizontalAlignment="Left"
                 Command="{Binding UpdateFiltersCommand}"/>
     </Grid>
 </Page>

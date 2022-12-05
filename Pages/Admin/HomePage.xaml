@@ -7,10 +7,8 @@
       mc:Ignorable="d"
       Background="#23262E"
       Title="HomePage">
+    
     <Grid>
-        <Label Content="Hi"
-               FontSize="26"
-               FontFamily="Monserrat"
-               Foreground="White"/>
+        
     </Grid>
 </Page>

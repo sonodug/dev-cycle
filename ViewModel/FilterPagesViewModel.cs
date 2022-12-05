@@ -21,7 +21,8 @@ namespace wpf_game_dev_cycle.ViewModel
         private IEnumerable _regDateTable;
         private IEnumerable _contractPriceTable;
         private IEnumerable _workStatusTable;
-        private IEnumerable _devTeamTable;
+        private IEnumerable _projectStatusTable;
+        private IEnumerable _verificationTable;
             
         private PageServiceSecondNest _pageServiceSecondNest;
         private UpdateTableService _updateTableService;
@@ -78,16 +79,26 @@ namespace wpf_game_dev_cycle.ViewModel
             }
         }
         
-        public IEnumerable DevTeamTable
+        public IEnumerable ProjectStatusTable
         {
-            get => _devTeamTable;
+            get => _projectStatusTable;
             set
             {
-                _devTeamTable = value;
+                _projectStatusTable = value;
                 OnPropertyChanged();
             }
         }
         
+        public IEnumerable VerificationTable
+        {
+            get => _verificationTable;
+            set
+            {
+                _verificationTable = value;
+                OnPropertyChanged();
+            }
+        }
+
         public FilterPagesViewModel(PageServiceSecondNest pageServiceSecondNest, UpdateTableService updateTableService)
         {
             _database = new CompanyContext();
@@ -116,8 +127,11 @@ namespace wpf_game_dev_cycle.ViewModel
             var filter4 = InitWorkStatusFilter();
             WorkStatusTable = filter4;
             
-            // var filter5 = InitDevTeamFilter();
-            // DevTeamTable = filter5;
+            var filter5 = InitProjectStatusFilter();
+            ProjectStatusTable = filter5;
+            
+            var filter6 = InitVerificationFilter();
+            VerificationTable = filter6;
         }
 
         private IEnumerable InitAuthFilter()
@@ -139,7 +153,7 @@ namespace wpf_game_dev_cycle.ViewModel
                         da.Login, 
                         da.Password 
                     }));
-            return filter.ToList();;
+            return filter.ToList();
         }
         
         private IEnumerable InitRegFilter()
@@ -152,7 +166,7 @@ namespace wpf_game_dev_cycle.ViewModel
                         i.Employment_date
                     })
                 .OrderBy(i => i.Employment_date);
-            return filter.ToList();;
+            return filter.ToList();
         }
         
         private IEnumerable InitContractPriceFilter()
@@ -199,10 +213,34 @@ namespace wpf_game_dev_cycle.ViewModel
             return filter.ToList();
         }
 
-        // private IEnumerable InitDevTeamFilter()
-        // {
-        //     
-        // }
+        private IEnumerable InitProjectStatusFilter()
+        {
+            _database.Projects.Load();
+            var filter = 
+                _database.Projects.Select(p => new
+                    {
+                        p.Name,
+                        p.Status,
+                        Deadline = p.Deadline_date
+                    })
+                    .OrderBy(p => p.Deadline);
+            return filter.ToList();
+        }
+        
+        private IEnumerable InitVerificationFilter()
+        {
+            _database.Verifications.Load();
+            _database.Publishers.Load();
+            var filter =
+                _database.Verifications.Select(v => new
+                {
+                    VerificationCode = v.Verification_code, 
+                    Employee = v.Employee_full_name,
+                    Publisher = _database.Publishers.Where(p => p.Publisher_code == v.Publisher_code)
+                        .Select(p => p.Full_name).FirstOrDefault()
+                });
+            return filter.ToList();
+        }
         
         public static IEnumerable<T> CreateList<T>(params T[] elements)
         {

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.ObjectModel;
 using System.Windows.Controls;
 using wpf_game_dev_cycle.Model;
@@ -31,7 +32,7 @@ namespace wpf_game_dev_cycle.ViewModel
         private readonly PageServiceFirstNest _pageServiceFirstNest;
 
         public Page PageSource { get; set; }
-
+        
         public MenuViewModel(PageServiceFirstNest pageServiceFirstNest)
         {
             CreateMenuItems();

@@ -19,7 +19,7 @@ namespace wpf_game_dev_cycle
             services.AddTransient<MenuViewModel>();
             services.AddTransient<FilterPagesViewModel>();
             services.AddTransient<FilterViewModel>();
-            
+
             services.AddSingleton<PageServiceFirstNest>();
             services.AddSingleton<PageServiceSecondNest>();
             services.AddSingleton<WindowNavigationService>();
@@ -37,8 +37,8 @@ namespace wpf_game_dev_cycle
 
         public LoginViewModel LoginViewModel => _provider.GetRequiredService<LoginViewModel>();
         public RegisterViewModel RegisterViewModel => _provider.GetRequiredService<RegisterViewModel>();
-        public MenuViewModel MenuViewModel => _provider.GetRequiredService<MenuViewModel>();
         public AdminViewModel AdminViewModel => _provider.GetRequiredService<AdminViewModel>();
+        public MenuViewModel MenuViewModel => _provider.GetRequiredService<MenuViewModel>();
         public FilterPagesViewModel FilterPagesViewModel => _provider.GetRequiredService<FilterPagesViewModel>();
         public FilterViewModel FilterViewModel => _provider.GetRequiredService<FilterViewModel>();
     }
