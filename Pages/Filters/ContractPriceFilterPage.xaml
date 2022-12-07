@@ -6,7 +6,6 @@
       xmlns:local="clr-namespace:wpf_game_dev_cycle.Pages.Filters"
       mc:Ignorable="d"
       DataContext="{Binding FilterPagesViewModel, Source={StaticResource ViewModelLocator}}"
-      Background="Beige"
       Title="СontractPriceFilterPage">
     <Grid>
         <DataGrid VerticalAlignment="Top"

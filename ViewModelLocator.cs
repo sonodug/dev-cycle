@@ -19,6 +19,7 @@ namespace wpf_game_dev_cycle
             services.AddTransient<MenuViewModel>();
             services.AddTransient<FilterPagesViewModel>();
             services.AddTransient<FilterViewModel>();
+            services.AddTransient<HomeViewModel>();
 
             services.AddSingleton<PageServiceFirstNest>();
             services.AddSingleton<PageServiceSecondNest>();
@@ -41,5 +42,6 @@ namespace wpf_game_dev_cycle
         public MenuViewModel MenuViewModel => _provider.GetRequiredService<MenuViewModel>();
         public FilterPagesViewModel FilterPagesViewModel => _provider.GetRequiredService<FilterPagesViewModel>();
         public FilterViewModel FilterViewModel => _provider.GetRequiredService<FilterViewModel>();
+        public HomeViewModel HomeViewModel => _provider.GetRequiredService<HomeViewModel>();
     }
 }

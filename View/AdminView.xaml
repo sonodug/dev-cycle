@@ -14,7 +14,7 @@
         BorderThickness="1"
         BorderBrush="Black"
         AllowsTransparency="True"
-        ResizeMode="CanResizeWithGrip">
+        ResizeMode="NoResize">
         
         <Window.Resources>
                 <ResourceDictionary>

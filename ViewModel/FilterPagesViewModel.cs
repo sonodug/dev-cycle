@@ -27,6 +27,15 @@ namespace wpf_game_dev_cycle.ViewModel
         private PageServiceSecondNest _pageServiceSecondNest;
         private UpdateTableService _updateTableService;
         private Page _pageSource;
+
+        private bool _isStartedProject { get; set; }
+        private bool _isInDevProject { get; set; }
+        private bool _isFinishedProject { get; set; }
+        
+        private bool _isStartedWork { get; set; }
+        private bool _isInProgressWork { get; set; }
+        private bool _isCompletedWork { get; set; }
+        
         public ICommand UpdateFiltersCommand { get; }
 
         public Page PageSource
@@ -98,7 +107,121 @@ namespace wpf_game_dev_cycle.ViewModel
                 OnPropertyChanged();
             }
         }
+        
+        public bool IsStartedProject
+        {
+            get => _isStartedProject;
+            set
+            {
+                if (value)
+                {
+                    if(_isStartedProject == value) return;
+                    _isStartedProject = value;
+                    UpdateByProjectStatusType("Started");
+                    OnPropertyChanged();
+                }
+                else
+                {
+                    _isStartedProject = value;
+                }
+            }
+        }
+        
+        public bool IsInDevProject
+        {
+            get => _isInDevProject;
+            set
+            {
+                if (value)
+                {
+                    if(_isInDevProject == value) return;
+                    _isInDevProject = value;
+                    UpdateByProjectStatusType("In development");
+                    OnPropertyChanged();
+                }
+                else
+                {
+                    _isInDevProject = value;
+                }
+            }
+        }
+        
+        public bool IsFinishedProject
+        {
+            get => _isFinishedProject;
+            set
+            {
+                if (value)
+                {
+                    if(_isFinishedProject == value) return;
+                    _isFinishedProject = value;
+                    UpdateByProjectStatusType("Finished");
+                    OnPropertyChanged();
+                }
+                else
+                {
+                    _isFinishedProject = value;
+                }
+            }
+        }
 
+        public bool IsStartedWork
+        {
+            get => _isStartedWork;
+            set
+            {
+                if (value)
+                {
+                    if(_isStartedWork == value) return;
+                    _isStartedWork = value;
+                    UpdateByWorkStatusType("Started");
+                    OnPropertyChanged();
+                }
+                else
+                {
+                    _isStartedWork = value;
+                }
+            }
+        }
+        
+        public bool IsInProgressWork
+        {
+            get => _isInProgressWork;
+            set
+            {
+                if (value)
+                {
+                    if(_isInProgressWork == value) return;
+                    _isInProgressWork = value;
+                    UpdateByWorkStatusType("In progress");
+                    OnPropertyChanged();
+                }
+                else
+                {
+                    _isInProgressWork = value;
+                }
+            }
+        }
+        
+        public bool IsCompletedWork
+        {
+            get => _isCompletedWork;
+            set
+            {
+                if (value)
+                {
+                    if(_isCompletedWork == value) return;
+                    _isCompletedWork = value;
+                    UpdateByWorkStatusType("Completed");
+                    OnPropertyChanged();
+                }
+                else
+                {
+                    _isCompletedWork = value;
+                }
+            }
+        }
+        
         public FilterPagesViewModel(PageServiceSecondNest pageServiceSecondNest, UpdateTableService updateTableService)
         {
             _database = new CompanyContext();
@@ -245,6 +368,41 @@ namespace wpf_game_dev_cycle.ViewModel
         public static IEnumerable<T> CreateList<T>(params T[] elements)
         {
             return new List<T>(elements);
+        }
+
+        private void UpdateByProjectStatusType(string status)
+        {
+            var filter =
+                _database.Projects.Select(p => new
+                    {
+                        p.Name,
+                        p.Status,
+                        Deadline = p.Deadline_date
+                    })
+                    .OrderBy(p => p.Deadline)
+                    .Where(p => p.Status == status);
+            
+            ProjectStatusTable = filter.ToList();
+        }
+
+        private void UpdateByWorkStatusType(string status)
+        {
+            var filter =
+                _database.DevelopmentTeams.Select(dt => new
+                {
+                    dt.Work_status,
+                    DeveloperName = _database.Developers.Where(d => d.Employee_code == dt.Employee_code)
+                        .Select(d => d.Full_name).FirstOrDefault(),
+
+                    ProjectName = _database.Repositories.Select(r => new
+                    {
+                        Project = _database.Projects.Where(pp => dt.Repository_id == r.Repository_id)
+                            .Where(pp => pp.Project_id == r.Project_id).Select(pp => pp.Name)
+                            .FirstOrDefault()
+                    }).FirstOrDefault(k => k.Project != null)
+                }).Where(i => i.Work_status == status);
+            
+            WorkStatusTable = filter.ToList();
         }
         
         private void ExecuteUpdateFiltersCommand(object obj)

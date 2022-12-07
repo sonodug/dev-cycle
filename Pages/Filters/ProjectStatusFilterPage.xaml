@@ -6,12 +6,23 @@
       xmlns:local="clr-namespace:wpf_game_dev_cycle.Pages.Filters"
       mc:Ignorable="d"
       DataContext="{Binding FilterPagesViewModel, Source={StaticResource ViewModelLocator}}"
-      Background="Beige"
       Title="ProjectStatusFilterPage">
     <Grid>
-        <DataGrid VerticalAlignment="Top"
-                  AutoGenerateColumns="True"
-                  HorizontalAlignment="Left"
-                  ItemsSource="{Binding ProjectStatusTable}"/>
+        <StackPanel Orientation="Horizontal">
+            <DataGrid VerticalAlignment="Top"
+                      AutoGenerateColumns="True"
+                      HorizontalAlignment="Left"
+                      ItemsSource="{Binding ProjectStatusTable}"/>
+            <StackPanel Orientation="Vertical"
+                        VerticalAlignment="Center"
+                        Margin="50,0,0,0">
+                <RadioButton Foreground="White" GroupName="Project" Content="Started"
+                             IsChecked="{Binding IsStartedProject}"/>
+                <RadioButton Foreground="White" GroupName="Project" Content="In development"
+                             IsChecked="{Binding IsInDevProject}"/>
+                <RadioButton Foreground="White" GroupName="Project" Content="Finished"
+                             IsChecked="{Binding IsFinishedProject}"/>
+            </StackPanel>
+        </StackPanel>
     </Grid>
 </Page>
