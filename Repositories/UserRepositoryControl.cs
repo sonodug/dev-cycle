@@ -26,8 +26,8 @@ namespace wpf_game_dev_cycle.Repositories
             {
                 connection.Open();
                 command.Connection = connection;
-                command.CommandText = "select *from [Account] where username=@username and [password]=@password";
-                command.Parameters.Add("@username", SqlDbType.NVarChar).Value = credential.UserName;
+                command.CommandText = "select *from [dev_cycle_company].[admin_accounts] where Login=@login and [password]=@password";
+                command.Parameters.Add("@login", SqlDbType.NVarChar).Value = credential.UserName;
                 command.Parameters.Add("@password", SqlDbType.NVarChar).Value = credential.Password;
                 
                 isUserValid = command.ExecuteScalar() == null ? false : true;
@@ -95,7 +95,7 @@ namespace wpf_game_dev_cycle.Repositories
                         user = new UserModel()
                         {
                             Id = reader[0].ToString(),
-                            Username = reader[1].ToString(),
+                            Login = reader[1].ToString(),
                             Password = string.Empty,
                             Name = reader[3].ToString(),
                             LastName = reader[4].ToString(),

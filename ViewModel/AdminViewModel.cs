@@ -10,6 +10,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using Microsoft.EntityFrameworkCore;
 using wpf_game_dev_cycle.Model;
+using wpf_game_dev_cycle.Repositories;
 using wpf_game_dev_cycle.Services;
 
 namespace wpf_game_dev_cycle.ViewModel
@@ -182,7 +183,7 @@ namespace wpf_game_dev_cycle.ViewModel
             
             // _userRepository = new UserRepositoryControl();
             // CurrentUserAccount = new UserAccountModel();
-
+            //
             // LoadCurrentUserData();
         }
 
@@ -472,7 +473,7 @@ namespace wpf_game_dev_cycle.ViewModel
             var user = _userRepository.GetByUsername(Thread.CurrentPrincipal.Identity.Name);
             if (user != null)
             {
-                CurrentUserAccount.Username = user.Username;
+                CurrentUserAccount.Username = user.Login;
                 CurrentUserAccount.DisplayName = $"Welcome {user.Name} {user.LastName} ;)";
                 CurrentUserAccount.ProfilePicture = null;
             }

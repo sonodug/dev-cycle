@@ -109,7 +109,7 @@ namespace wpf_game_dev_cycle.ViewModel
                 Thread.CurrentPrincipal = new GenericPrincipal(
                     new GenericIdentity(Username), null);
                 
-                _navigationService.ChangeWindow(new MainWindow());
+                _navigationService.ChangeWindow(new AdminView());
                 _loginService.Login();
             }
             else

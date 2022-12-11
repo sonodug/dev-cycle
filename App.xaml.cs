@@ -15,8 +15,11 @@ namespace wpf_game_dev_cycle
         {
             ViewModelLocator.Init();
 
-            var adminView = new AdminView();
-            adminView.Show();
+            // var adminView = new AdminView();
+            // adminView.Show();
+
+            var loginView = new LoginView();
+            loginView.Show();
 
             // var mainView = new MainWindow();
             // mainView.Show();
