@@ -39,7 +39,7 @@ namespace wpf_game_dev_cycle.ViewModel
 
         public ObservableCollection<Table> TableItems { get; set; }
 
-        public ICommand UpdateCommand { get; }
+        public ICommand SaveChangesCommand { get; }
         public ICommand DeleteRowCommand { get; }
         public ICommand SelectCommand { get; }
         public ICommand ReturnSelectCommand { get; }
@@ -169,7 +169,7 @@ namespace wpf_game_dev_cycle.ViewModel
             AddTablesList();
             InitializeSets();
 
-            UpdateCommand = new RelayCommand(ExecuteUpdateCommand);
+            SaveChangesCommand = new RelayCommand(ExecuteSaveChangesCommand);
             DeleteRowCommand = new RelayCommand(ExecuteDeleteRowCommand);
             SelectCommand = new RelayCommand(ExecuteSelectCommand);
             ReturnSelectCommand = new RelayCommand(ExecuteReturnSelectCommand);
@@ -185,10 +185,21 @@ namespace wpf_game_dev_cycle.ViewModel
 
             // LoadCurrentUserData();
         }
-        
+
+        private void ExecuteSaveChangesCommand(object obj)
+        {
+            try
+            {
+                _database.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Changes cannot be saved correctly", "Warning", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
         private void ExecuteDeleteRowCommand(object obj)
         {
-            //visitor
             try
             {
                 switch (SelectedTable.Name)
@@ -316,21 +327,9 @@ namespace wpf_game_dev_cycle.ViewModel
                     }
                 }
             }
-            catch (DbEntityValidationException e)
+            catch (Exception e)
             {
-                
-            }
-        }
-
-        private void ExecuteUpdateCommand(object obj)
-        {
-            try
-            {
-                _database.SaveChanges();
-            }
-            catch (DbEntityValidationException e)
-            {
-                
+                MessageBox.Show("Item cannot be deleted correctly", "Warning", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -455,7 +454,7 @@ namespace wpf_game_dev_cycle.ViewModel
             }
             catch (Exception e)
             {
-                // mb??
+                MessageBox.Show("Sql request cannot be executed correctly", "Warning", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
         
@@ -465,10 +464,7 @@ namespace wpf_game_dev_cycle.ViewModel
             {
                 UpdateCurrentInterfaceTable(SelectedTable);
             }
-            catch (Exception e)
-            {
-                
-            }
+            catch (Exception e) {}
         }
 
         private void LoadCurrentUserData()
