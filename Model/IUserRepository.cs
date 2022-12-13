@@ -11,6 +11,7 @@ namespace wpf_game_dev_cycle.Model
     {
         bool AuthenticateUser(NetworkCredential credential);
         bool RegisterUser(NetworkCredential credential, string name, string lastname, string email, string phone);
+        bool RegisterUser(NetworkCredential credential);
         void Add(UserModel userModel);
         void Edit(UserModel userModel);
         void Remove(int id);

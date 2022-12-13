@@ -17,7 +17,7 @@ namespace wpf_game_dev_cycle.ViewModel
 {
     public class RegisterViewModel : ObservableObject
     {
-        private string _username;
+        private string _login;
         private SecureString _password;
         private string _name;
         private string _lastName;
@@ -42,13 +42,13 @@ namespace wpf_game_dev_cycle.ViewModel
             }
         }
 
-        public string Username
+        public string Login
         {
-            get => _username;
+            get => _login;
 
             set
             {
-                _username = value;
+                _login = value;
                 OnPropertyChanged();
             }
         }
@@ -60,50 +60,6 @@ namespace wpf_game_dev_cycle.ViewModel
             set
             {
                 _password = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public string Name
-        {
-            get => _name;
-
-            set
-            {
-                _name = value;
-                OnPropertyChanged();
-            }
-        }
-        
-        public string LastName
-        {
-            get => _lastName;
-
-            set
-            {
-                _lastName = value;
-                OnPropertyChanged();
-            }
-        }
-        
-        public string Email
-        {
-            get => _email;
-
-            set
-            {
-                _email = value;
-                OnPropertyChanged();
-            }
-        }
-        
-        public string PhoneNumber
-        {
-            get => _phoneNumber;
-
-            set
-            {
-                _phoneNumber = value;
                 OnPropertyChanged();
             }
         }
@@ -139,13 +95,14 @@ namespace wpf_game_dev_cycle.ViewModel
 
         private void ExecuteRegisterCommand(object obj)
         {
-            var isValidUser = _userRepository.RegisterUser(new NetworkCredential(Username, Password), Name, LastName, Email, PhoneNumber);
+            var isValidUser = _userRepository.RegisterUser(new NetworkCredential(Login, Password));
             if (isValidUser)
             {
                 Thread.CurrentPrincipal = new GenericPrincipal(
-                    new GenericIdentity(Username), null);
+                    new GenericIdentity(Login), null);
                 
-                _pageServiceFirstNest.ChangePage(new EmailVerificationPage());
+                //_pageServiceFirstNest.ChangePage(new EmailVerificationPage());
+                _navigationService.ChangeWindow(new AdminView());
                 _regService.Register();
             }
             else
@@ -157,7 +114,7 @@ namespace wpf_game_dev_cycle.ViewModel
         private bool CanExecuteRegisterCommand(object obj)
         {
             bool validData;
-            if (string.IsNullOrWhiteSpace(Username) || Username.Length < 3 || Password == null || Password.Length < 3)
+            if (string.IsNullOrWhiteSpace(Login) || Login.Length < 3 || Password == null || Password.Length < 3)
                 validData = false;
             else
                 validData = true;

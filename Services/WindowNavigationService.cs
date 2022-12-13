@@ -10,6 +10,7 @@ namespace wpf_game_dev_cycle.Services
         public event Action<Window> WindowChanged = (window) =>
         {
             Window currentWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
+            Application.Current.MainWindow = window;
             window.Show();
             currentWindow.Close();
         };

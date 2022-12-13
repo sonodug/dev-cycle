@@ -21,6 +21,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="80"/>
             <RowDefinition Height="100"/>
         </Grid.RowDefinitions>
         
@@ -50,8 +51,29 @@
                       DisplayMemberPath="Name"
                       SelectedIndex="0"/>
         </Border>
-        
+
         <Border Grid.Row="1"
+                Grid.ColumnSpan="2"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Margin="0,40,0,0">
+            <StackPanel Orientation="Horizontal">
+                <TextBox Text="{Binding SqlExecutionText}"
+                         Width="400"
+                         Height="30"
+                         FontFamily="Montserrat"
+                         FontWeight="Medium"
+                         FontSize="14"
+                         VerticalContentAlignment="Center"
+                         HorizontalAlignment="Center"/>
+                <Button Content="Execute"
+                        Command="{Binding SqlCommand}"
+                        FontSize="14"
+                        Style="{StaticResource DatabaseConfigureButton_Style}"/>
+            </StackPanel>
+        </Border>
+        
+        <Border Grid.Row="2"
                 Grid.ColumnSpan="2"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center">

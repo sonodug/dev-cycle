@@ -8,7 +8,7 @@
         xmlns:CustomControls="clr-namespace:wpf_game_dev_cycle.CustomControls"
         DataContext="{Binding Path=RegisterViewModel, Source={StaticResource ViewModelLocator}}"
         mc:Ignorable="d"
-        Title="RegisterView" Height="550" Width="500"
+        Title="RegisterView" Height="400" Width="500"
         WindowStyle="None"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
@@ -45,8 +45,9 @@
 
             <Border.Background>
                 <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
-                    <GradientStop Color="#090909" Offset="0"/>
-                    <GradientStop Color="#1A1A1A" Offset="1"/>
+                    <GradientStop Color="#1A1A1A" Offset="0.2"/>
+                    <GradientStop Color="MediumPurple" Offset="0.5"/>
+                    <GradientStop Color="#131313" Offset="0.8"/>
                 </LinearGradientBrush>
             </Border.Background>
 
@@ -67,7 +68,7 @@
                     </Grid.ColumnDefinitions>
 
                     <TextBlock Text="Registration"
-                               Foreground="DarkGray"
+                               Foreground="Black"
                                FontSize="10"
                                FontFamily="Montserrat"
                                Grid.Column="0"
@@ -116,7 +117,7 @@
                 
                 <Frame Grid.Row="2"
                        NavigationUIVisibility="Hidden"
-                       Source="/Pages/RegistrationPage.xaml"
+                       Source="/Pages/Registration/RegistrationPage.xaml"
                        Content="{Binding PageSource}">
                 </Frame>
             </Grid>

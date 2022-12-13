@@ -35,6 +35,7 @@ namespace wpf_game_dev_cycle.Repositories
             return isUserValid;
         }
 
+        //wrong
         public bool RegisterUser(NetworkCredential credential, string name, string lastname, string email, string phone)
         {
             bool isUserValid;
@@ -54,6 +55,30 @@ namespace wpf_game_dev_cycle.Repositories
                 command.Parameters.Add("@email", SqlDbType.NVarChar).Value = email;
                 command.Parameters.Add("@phone", SqlDbType.NVarChar).Value = phone;
                 
+                result = command.ExecuteNonQuery();
+            }
+
+            if (result <= 0)
+                throw new Exception();
+
+            return true;
+        }
+        
+        public bool RegisterUser(NetworkCredential credential)
+        {
+            bool isUserValid;
+            int result;
+            
+            using (var connection = GetConnection())
+            using (var command = new SqlCommand())
+            {
+                connection.Open();
+                command.Connection = connection;
+                command.CommandText = "insert into [dev_cycle_company].[admin_accounts] (Account_id, Login, Password)" +
+                                      "values (NEWID(), @login, @password)";
+                command.Parameters.Add("@login", SqlDbType.NVarChar).Value = credential.UserName;
+                command.Parameters.Add("@password", SqlDbType.NVarChar).Value = credential.Password;
+
                 result = command.ExecuteNonQuery();
             }
 
